@@ -14,7 +14,7 @@ const ReadMore = ({ text, maxLength }) => {
     <>
       <p>
         {displayText}
-        {text.length > maxLength && <span onClick={toggleTruncate}>{isTruncated ? 'Read More' : 'Read Less'}</span>}
+        {text.length > maxLength && <b onClick={toggleTruncate} className='ms-2'>{isTruncated ? ' More' : ' Less'}</b>}
       </p>
     </>
   );

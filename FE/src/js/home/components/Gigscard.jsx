@@ -13,10 +13,10 @@ const Gigscard = () => {
   return (
     <Container>
       <Row>
-        {data.map((p) => (
-          <Col md={4}>
+        {data.map((p,i) => (
+          <Col md={4} key={i} className='p-2'>
             <Card className='p-2'>
-              <img src='https://dummyimage.com/600x400/000/fff' alt='' className='rounded-4' />
+              <img src='https://dummyimage.com/600x600/000/fff' alt='' className='rounded-4' />
               <div className='d-flex my-3 justify-content-between'>
                 <div>Gig name here</div>
                 <div>RS. 1000</div>
