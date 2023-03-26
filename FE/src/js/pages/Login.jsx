@@ -1,9 +1,11 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+//styles
+import styles from '../../scss/pages/login.module.scss'
 
 const Login = () => {
   return (
-    <Container>
+    <Container className={styles.conatiner}>
         
         Login
     </Container>
