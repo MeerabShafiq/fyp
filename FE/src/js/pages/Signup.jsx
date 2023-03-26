@@ -1,12 +1,24 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
-//styles
-import styles from '../../scss/pages/login.module.scss'
 
-const Login = () => {
-  return (
-    <form>
-        <h3>Sign In</h3>
+const Signup=()=>{
+  
+    return (
+      <form>
+        <h3>Sign Up</h3>
+
+        <div className="mb-3">
+          <label>First name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="First name"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label>Last name</label>
+          <input type="text" className="form-control" placeholder="Last name" />
+        </div>
 
         <div className="mb-3">
           <label>Email address</label>
@@ -26,29 +38,16 @@ const Login = () => {
           />
         </div>
 
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
-
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Submit
+            Sign Up
           </button>
         </div>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+          Already registered <a href="/sign-in">sign in?</a>
         </p>
       </form>
-  )
-}
-
-export default Login
+    )
+  
+    }
+    export default Signup
