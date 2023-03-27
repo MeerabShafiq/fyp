@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ReadMore from '../../components/core/global/ReadMore';
+import ReadMore from '../core/global/ReadMore';
 import Gigscard from './Gigscard';
 
 const GigWrapper = () => {
