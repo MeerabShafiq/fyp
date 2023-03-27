@@ -1,53 +1,83 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Container, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+//styles
+import styles from '../../scss/pages/login.module.scss';
 
-const Signup=()=>{
-  
-    return (
-      <form>
+const Signup = () => {
+  const navigate = useNavigate();
+  const [loginform, setLoginform] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confrimPassword: '',
+  });
+
+  const handleChange = (e) => {
+    setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = () => {
+    firstName && lastName && email && password && confrimPassword && navigate('/login');
+  };
+  return (
+    <Container className={styles.container}>
+      <Form className={styles.formContainer} onSubmit={handleSubmit}>
         <h3>Sign Up</h3>
 
-        <div className="mb-3">
+        <div className='mb-3'>
           <label>First name</label>
           <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
+            type='text'
+            className='form-control'
+            placeholder='First name'
+            name='firstName'
+            onChange={handleChange}
           />
         </div>
 
-        <div className="mb-3">
+        <div className='mb-3'>
           <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" />
+          <input type='text' className='form-control' placeholder='Last name' name='lastName' onChange={handleChange} />
         </div>
 
-        <div className="mb-3">
+        <div className='mb-3'>
           <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-          />
+          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={handleChange} />
         </div>
 
-        <div className="mb-3">
+        <div className='mb-3'>
           <label>Password</label>
           <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
+            type='password'
+            className='form-control'
+            placeholder='Enter password'
+            name='password'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='mb-3'>
+          <label>confirm Password</label>
+          <input
+            type='password'
+            className='form-control'
+            placeholder='Confirm password'
+            name='confirmPassword'
+            onChange={handleChange}
           />
         </div>
 
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+        <div className='d-grid'>
+          <button type='submit' className='btn btn-primary'>
             Sign Up
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Already registered <a href="/sign-in">sign in?</a>
+
+        <p className='forgot-password text-right'>
+          Already registered <a href='/sign-in'>sign in?</a>
         </p>
-      </form>
-    )
-  
-    }
-    export default Signup
+      </Form>
+    </Container>
+  );
+};
+export default Signup;
