@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import ReadMore from '../core/global/ReadMore';
+import { Link } from 'react-router-dom';
+import ReadMore from '../../components/core/global/ReadMore';
 
 const Gigscard = () => {
   const data = ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'];
@@ -18,7 +19,7 @@ const Gigscard = () => {
             <Card className='p-2'>
               <img src='https://dummyimage.com/600x600/000/fff' alt='' className='rounded-4' />
               <div className='d-flex my-3 justify-content-between'>
-                <div>Gig name here</div>
+                <div> <Link to='/gig-detail'>Gig name here</Link> </div>
                 <div>RS. 1000</div>
               </div>
               <ReadMore text={text} maxLength={50} />
