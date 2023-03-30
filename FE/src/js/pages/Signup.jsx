@@ -18,7 +18,10 @@ const Signup = () => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
   const handleSubmit = () => {
-    firstName && lastName && email && password && confrimPassword && navigate('/login');
+   ( (loginform.firstName),
+    (loginform.lastName),
+    (loginform.email) ,(loginform.password || loginform.confrimPassword)&& navigate('/')
+    );
   };
   return (
     <Container className={styles.container}>
@@ -68,13 +71,13 @@ const Signup = () => {
         </div>
 
         <div className='d-grid'>
-          <button type='submit' className='btn btn-primary'>
+          <button type='submit'  className='btn btn-primary'  >
             Sign Up
           </button>
         </div>
 
         <p className='forgot-password text-right'>
-          Already registered <a href='/sign-in'>sign in?</a>
+          Already registered <a href='/login'>sign in?</a>
         </p>
       </Form>
     </Container>
