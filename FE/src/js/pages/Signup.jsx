@@ -17,11 +17,31 @@ const Signup = () => {
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
    ( (loginform.firstName),
     (loginform.lastName),
     (loginform.email) ,(loginform.password || loginform.confrimPassword)&& navigate('/')
     );
+    let fnameError = '';
+    let lnameError = '';
+    let emailError = '';
+    let passwordError = '';
+    let conformPasswordError = '';
+    const {firstName,email}= this.state;
+    
+    if (!firstName){
+      fnameError = "fname is required";
+    } 
+    if (!email){
+      emailError = "email is required";
+    }
+    if (firstName || email) {
+      this.setState({ fnameError,emailError: 'Please fix the errors below.' });
+      return;
+    }
+     
+
   };
   return (
     <Container className={styles.container}>
@@ -29,14 +49,21 @@ const Signup = () => {
         <h3>Sign Up</h3>
 
         <div className='mb-3'>
-          <label>First name</label>
+                    <label>First name</label>
           <input
+          
             type='text'
             className='form-control'
             placeholder='First name'
             name='firstName'
-            onChange={handleChange}
+            
+            onChange={(event)=>{
+              const firstName = event.target.value;
+              const fnameError = firstName ? '' : "first name is required";
+              this.setState({firstName,fnameError});
+            }}
           />
+       
         </div>
 
         <div className='mb-3'>
@@ -44,11 +71,18 @@ const Signup = () => {
           <input type='text' className='form-control' placeholder='Last name' name='lastName' onChange={handleChange} />
         </div>
 
+       
         <div className='mb-3'>
+        
+        value={this.state.emailError}
           <label>Email address</label>
-          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={handleChange} />
+          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={(event)=>{
+            const email = event.target.value;
+            const emailError = email ? '' : "email is required";
+            this.setState({email,emailError});
+          }} />
         </div>
-
+      
         <div className='mb-3'>
           <label>Password</label>
           <input
