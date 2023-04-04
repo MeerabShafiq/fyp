@@ -43,6 +43,7 @@ const CNavbar = () => {
             </Nav.Link>
             <Nav.Link href='#' className={clsx(styles.pnav_color, 'mx-3')}>
               Switch to Buyer
+              <div className={styles.profileOnline} />
             </Nav.Link>
             <Nav.Link href='#' className={clsx(styles.pnav_color, 'mx-3')}>
               <div className='position-relative'>

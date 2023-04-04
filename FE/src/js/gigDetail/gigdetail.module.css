@@ -1,0 +1,23 @@
+.card{
+    box-shadow:  0 1rem 3rem rgba(rgb(37, 32, 32), .175) ;
+    color: rgb(0 102 169);
+}
+.gigInfo{
+    padding: 20px 0px;
+    color: rgb(18 57 110);
+    
+}
+.cardTitle{
+    color: rgb(18 57 110);
+    
+}
+.cardText{
+padding: 20px 0;
+width: 65%;
+}
+.prices{
+    padding: 10px 0px;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}

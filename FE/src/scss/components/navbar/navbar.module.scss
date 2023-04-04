@@ -1,5 +1,5 @@
 .nav_container{
-    background-color: rgba(10, 10, 142, 0.698) !important;
+    background-color: rgb(18 57 110) !important;
     color:#FFF !important;
 }
 .pnav_color{
@@ -17,6 +17,15 @@
     position: relative;
     right: -34px;
     top: -43px;
+}
+.profileOnline{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color:#22CC7A;
+    position: relative;
+    right: -110px;
+    top: -24px;
 }
 .messageonline{
     width: 10px;
