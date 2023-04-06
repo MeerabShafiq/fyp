@@ -6,34 +6,60 @@ import styles from '../../scss/pages/login.module.scss';
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const [email, setemail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [loginform, setLoginform] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
   const handleSubmit = () => {
+     
+    if(email==="" || password==="")
+     { 
+       setErrorMessage('field is empty');
+     }
+     else {
+      alert('login')
+     }
 
     (loginform.email&& loginform.password)&& navigate('/');
   };
   return (
+  
     <Container className={styles.container}>
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
-        <h3>Sign In</h3>
 
-        <div className='mb-3'>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
+      
+        <h3>Sign In</h3>
+   
+        <div className='mb-3' >
           <label>Email address</label>
-          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={handleChange} />
+          <input type='email' className='form-control' placeholder='Enter email' name='email' value={email} onChange={(event)=> setemail(event.target.email)} />
+         
+          <div style={{color:'red'}}>
+          {errorMessage}
+            </div>
         </div>
 
         <div className='mb-3'>
+       
           <label>Password</label>
           <input
             type='password'
             className='form-control'
             placeholder='Enter password'
             name='password'
-            onChange={handleChange}
+            value={password}
+            onChange={(event)=> setPassword(event.target.password)}
+          
           />
+           <div style={{color:'red'}}>
+          {errorMessage}
+            </div>
         </div>
 
         <div className='mb-3'>
@@ -57,7 +83,10 @@ const Login = () => {
           New User? <a href='/signup'>Sign up </a>
         </p>
       </form>
+     
+      
     </Container>
+   
   );
 };
 
