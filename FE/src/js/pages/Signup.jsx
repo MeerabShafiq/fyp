@@ -49,19 +49,14 @@ const Signup = () => {
         <h3>Sign Up</h3>
 
         <div className='mb-3'>
-                    <label>First name</label>
+        <label>First name</label>
           <input
-          
             type='text'
             className='form-control'
             placeholder='First name'
             name='firstName'
             
-            onChange={(event)=>{
-              const firstName = event.target.value;
-              const fnameError = firstName ? '' : "first name is required";
-              this.setState({firstName,fnameError});
-            }}
+            onChange={handleChange}
           />
        
         </div>
@@ -74,13 +69,9 @@ const Signup = () => {
        
         <div className='mb-3'>
         
-        value={this.state.emailError}
+      
           <label>Email address</label>
-          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={(event)=>{
-            const email = event.target.value;
-            const emailError = email ? '' : "email is required";
-            this.setState({email,emailError});
-          }} />
+          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={handleChange}/>
         </div>
       
         <div className='mb-3'>
@@ -113,6 +104,7 @@ const Signup = () => {
         <p className='forgot-password text-right'>
           Already registered <a href='/login'>sign in?</a>
         </p>
+      
       </Form>
     </Container>
   );

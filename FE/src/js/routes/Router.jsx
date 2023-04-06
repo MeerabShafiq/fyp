@@ -9,7 +9,7 @@ import AddUpdategig from '../pages/AddUpdategig'
 const Router = () => {
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route index element={<Signup />} />
       <Route path="/gig-add" element={<AddUpdategig />} />
       <Route path="/gig-edit:id" element={<AddUpdategig />} />
       <Route path="/gig-detail" element={<GigDetail />} />
