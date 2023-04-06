@@ -6,23 +6,40 @@ import styles from '../../scss/pages/login.module.scss';
 
 const Login = () => {
   const navigate = useNavigate();
+
   const [loginform, setLoginform] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (loginform.email === '' || loginform.password === '') {
+      setErrorMessage('field is empty');
+    } else {
+      alert('login');
+    }
 
-    (loginform.email&& loginform.password)&& navigate('/');
+    loginform.email && loginform.password && navigate('/home');
   };
   return (
     <Container className={styles.container}>
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
+      <form className={styles.formContainer}>
         <h3>Sign In</h3>
 
         <div className='mb-3'>
           <label>Email address</label>
-          <input type='email' className='form-control' placeholder='Enter email' name='email' onChange={handleChange} />
+          <input
+            type='email'
+            className='form-control'
+            placeholder='Enter email'
+            name='email'
+            value={loginform.email}
+            onChange={handleChange}
+          />
+
+          <div style={{ color: 'red' }}>{errorMessage}</div>
         </div>
 
         <div className='mb-3'>
@@ -32,8 +49,10 @@ const Login = () => {
             className='form-control'
             placeholder='Enter password'
             name='password'
+            value={loginform.password}
             onChange={handleChange}
           />
+          <div style={{ color: 'red' }}>{errorMessage}</div>
         </div>
 
         <div className='mb-3'>
@@ -46,12 +65,15 @@ const Login = () => {
         </div>
 
         <div className='d-grid'>
-          <button type='submit' className='btn btn-primary'>
+          <button className='btn btn-primary' onClick={handleSubmit}>
             Submit
           </button>
         </div>
         <p className='forgot-password text-right'>
-          Forgot <Link to='#'>password?</Link>
+          Forgot password <Link to='#'> password Reset</Link>
+        </p>
+        <p className={styles.signup}>
+          New User? <a href='/signup'>Sign up </a>
         </p>
       </form>
     </Container>
