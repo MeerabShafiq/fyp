@@ -7,59 +7,52 @@ import styles from '../../scss/pages/login.module.scss';
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setemail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
   const [loginform, setLoginform] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = () => {
-     
-    if(email==="" || password==="")
-     { 
-       setErrorMessage('field is empty');
-     }
-     else {
-      alert('login')
-     }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (loginform.email === '' || loginform.password === '') {
+      setErrorMessage('field is empty');
+    } else {
+      alert('login');
+    }
 
-    (loginform.email&& loginform.password)&& navigate('/');
+    loginform.email && loginform.password && navigate('/home');
   };
   return (
-  
     <Container className={styles.container}>
-
-      <form className={styles.formContainer} onSubmit={handleSubmit}>
-      
+      <form className={styles.formContainer}>
         <h3>Sign In</h3>
-   
-        <div className='mb-3' >
+
+        <div className='mb-3'>
           <label>Email address</label>
-          <input type='email' className='form-control' placeholder='Enter email' name='email' value={email} onChange={(event)=> setemail(event.target.email)} />
-         
-          <div style={{color:'red'}}>
-          {errorMessage}
-            </div>
+          <input
+            type='email'
+            className='form-control'
+            placeholder='Enter email'
+            name='email'
+            value={loginform.email}
+            onChange={handleChange}
+          />
+
+          <div style={{ color: 'red' }}>{errorMessage}</div>
         </div>
 
         <div className='mb-3'>
-       
           <label>Password</label>
           <input
             type='password'
             className='form-control'
             placeholder='Enter password'
             name='password'
-            value={password}
-            onChange={(event)=> setPassword(event.target.password)}
-          
+            value={loginform.password}
+            onChange={handleChange}
           />
-           <div style={{color:'red'}}>
-          {errorMessage}
-            </div>
+          <div style={{ color: 'red' }}>{errorMessage}</div>
         </div>
 
         <div className='mb-3'>
@@ -72,7 +65,7 @@ const Login = () => {
         </div>
 
         <div className='d-grid'>
-          <button type='submit' className='btn btn-primary'>
+          <button className='btn btn-primary' onClick={handleSubmit}>
             Submit
           </button>
         </div>
@@ -83,10 +76,7 @@ const Login = () => {
           New User? <a href='/signup'>Sign up </a>
         </p>
       </form>
-     
-      
     </Container>
-   
   );
 };
 
