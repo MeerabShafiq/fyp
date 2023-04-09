@@ -11,21 +11,22 @@ const Login = () => {
   // const [errorMessage, setErrorMessage] = useState('');
   const [emailerror, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
-    let emailS ='';
-    let passwordS ='';
+
 
     e.preventDefault();
    let isValid = true;
+   
    if(loginform.email.trim()==='')
    {
     setEmailError('email is required')
     isValid = false;
-    emailS=loginform.email;
+    
 
   }
    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(loginform.email)) {
@@ -34,20 +35,21 @@ const Login = () => {
    else{
     setEmailError('')
    }
-   if(loginform.password.trim()==='')
+     if(loginform.password.trim() ==='')
    {
     setPasswordError('password is required')
-  isValid=false 
-     passwordS=loginform.password;  
-     console.log(passwordS)
+     isValid=false 
+    
 
 }else{
     setEmailError('')
   }
-  if(loginform.email==emailS && loginform.password==passwordS)
-  {
+  
     loginform.email && loginform.password && navigate('/home');
-  }
+  
+  
+   
+  
    
   };
   return (
@@ -63,10 +65,10 @@ const Login = () => {
             placeholder='Enter email'
             name='email'
             value={loginform.email}
-            onChange={handleChange}
+            onChange={handleChange=> setLoginform(handleChange.target.value)}
           />
 
-        {emailerror &&<div>{emailerror}</div>}
+        {emailerror &&<div style={{color:"red"}}>{emailerror}</div>}
         </div>
 
         <div className='mb-3'>
@@ -77,9 +79,9 @@ const Login = () => {
             placeholder='Enter password'
             name='password'
             value={loginform.password}
-            onChange={handleChange}
+            onChange={event=> setLoginform(event.target.value)}
           />
-           {passwordError &&<div>{passwordError}</div>}
+           {passwordError &&<div style={{color:"red"}}>{passwordError}</div>}
         </div>
 
         <div className='mb-3'>
