@@ -17,37 +17,31 @@ const Login = () => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
-
-
     e.preventDefault();
-   let isValid = true;
-   
-   if(loginform.email.trim()==='')
-   {
-    setEmailError('email is required')
-    isValid = false;
-    
-
-  }
-   else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(loginform.email)) {
-    setEmailError('Invalid email address')
-  }
-   else{
-    setEmailError('')
-   }
-     if(loginform.password.trim() ==='')
-   {
-    setPasswordError('password is required')
-     isValid=false 
-    
-
-}else{
-    setEmailError('')
-  }
+    let isValid = true;
   
-    loginform.email && loginform.password && navigate('/home');
-   
+    if (loginform.email.trim() === '') {
+      setEmailError('email is required');
+      isValid = false;
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(loginform.email)) {
+      setEmailError('Invalid email address');
+      isValid = false;
+    } else {
+      setEmailError('');
+    }
+  
+    if (loginform.password.trim() === '') {
+      setPasswordError('password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+  
+    if (loginform.email && loginform.password && isValid) {
+      navigate('/home');
+    }
   };
+  
   return (
     <Container className={styles.container}>
       <form className={styles.formContainer}>
