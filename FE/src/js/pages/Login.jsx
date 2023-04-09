@@ -46,10 +46,6 @@ const Login = () => {
   }
   
     loginform.email && loginform.password && navigate('/home');
-  
-  
-   
-  
    
   };
   return (
@@ -65,7 +61,7 @@ const Login = () => {
             placeholder='Enter email'
             name='email'
             value={loginform.email}
-            onChange={handleChange=> setLoginform(handleChange.target.value)}
+            onChange={handleChange}
           />
 
         {emailerror &&<div style={{color:"red"}}>{emailerror}</div>}
@@ -79,7 +75,7 @@ const Login = () => {
             placeholder='Enter password'
             name='password'
             value={loginform.password}
-            onChange={event=> setLoginform(event.target.value)}
+            onChange={handleChange}
           />
            {passwordError &&<div style={{color:"red"}}>{passwordError}</div>}
         </div>
