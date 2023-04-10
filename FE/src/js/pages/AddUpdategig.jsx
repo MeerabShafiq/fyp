@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Container, Form } from 'react-bootstrap';
-import styles from '../addUpdateGig/addUpdate.module.css';
+import styles from '../../scss/pages/addUpdate.module.scss';
 
 const AddUpdategig = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const AddUpdategig = () => {
             </Form.Group>
             <Form.Group >
               <Form.Control className='d-none' id='addfile' name='file' ref={fileInputRef} type='file' onChange={handleFileChange} />
-            <Button className={styles.bordered_button} for='input-id'>
+            <Button className={styles.bordered_button} hmlFor='input-id'>
               +
             </Button>
             </Form.Group>

@@ -1,0 +1,36 @@
+.header{
+    margin-top: 20px;
+    padding: 10px 10px;
+    background-color: rgb(18 57 110);
+    color: white;
+    border-top-left-radius:15px ;
+    border-top-right-radius:15px ;
+}
+.container{
+    padding: 5rem;
+    width: 70%;
+}
+.username{
+    color:rgba(18, 56, 110, 0.854) ;
+}
+.usermail{
+    color:rgba(18, 56, 110, 0.465) ;
+}
+
+.bordered_button {
+    margin: 2px 0px;
+    border: 1px dotted black !important;
+    padding: 1px !important;
+    height: 30px !important;
+    width: 30px !important;
+    background-color: white !important;
+    color: black !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+}
+
+.bordered_button:hover {
+    background-color: black !important;
+    color: white !important;
+}
