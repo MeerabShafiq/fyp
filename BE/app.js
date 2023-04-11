@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const Register = require('./models/signup')
 app.use(express.json());
 const cors = require("cors");
 app.use(cors());
@@ -21,10 +22,14 @@ const JWT_SECRET =
 
 const mongoUrl =
   "mongodb+srv://root2hack:11223344@cluster0.qddtl14.mongodb.net/test";
+  mongoose.set('strictQuery',true),
 
 mongoose
   .connect(mongoUrl, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
+    
+    
   })
   .then(() => {
     console.log("Connected to database");
@@ -36,14 +41,22 @@ mongoose
 
 app.post('/signup', (req,res)=>{
   const {fname, lname, email, password , cpassword}=req.body
-  res.send({
+     const register = new Register({
     fname:req.body.fname,
     lname:req.body.lname,
     email:req.body.email,
-    password:req.body.password,
-    cpassword:req.body.cpassword
+    Password:req.body.password,
+    Conformpassword:req.body.Conformpassword
+  });
+  register.save().then((result)=>{
+    res.send(result);
+  }).catch((err)=>{
+    console.log(err);
   })
-  console.log({fname,lname,email,password,cpassword})
+
+
+
+  console.log({fname,lname,email,password,Conformpassword})
 });
 
 
