@@ -40,7 +40,8 @@ mongoose
 // require("./imageDetails");
 
   app.post('/signup', async(req,res)=>{
-  const {firstName, lastName, email, password , confrimPassword}=req.body;
+  console.log(req)
+    const {firstName, lastName, email, password , confrimPassword}=req.body;
      const register = new Register({
       firstName:req.body.firstName,
       lastName:req.body.lastName,
@@ -48,13 +49,11 @@ mongoose
     password:req.body.password,
     confrimPassword:req.body.confrimPassword
   });
-  
-    await register.save().then((result)=>{
-    res.send(result);
+    await register.save().then((register)=>{
+    res.send({data:'success signup',status:200});
   }).catch((err)=>{
     console.log(err);
   })
-  console.log({firstName,lastName,email,password,confrimPassword})
 });
 
 
