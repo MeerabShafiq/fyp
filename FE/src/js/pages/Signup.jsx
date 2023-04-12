@@ -3,6 +3,7 @@ import { Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 //styles
 import styles from '../../scss/pages/login.module.scss';
+import axios from 'axios'
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Signup = () => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     if (!loginform.firstName.trim()) {
       setErrors((p) => ({ ...p, firstName: 'First Name is required' }));
@@ -70,8 +71,16 @@ const Signup = () => {
       console.log('Form not submitted');
     } else {
       // Submit form
-      navigate('/login');
-      console.log('Form submitted');
+try{
+ await axios.post('http://127.0.0.1:5173/signup',(loginform.firstName,loginform.lastName,loginform.email,loginform.password,loginform.confrimPassword));
+console.log("success");
+navigate('/login');
+console.log('Form submitted');
+
+}catch(e){
+  console.error(e);
+}
+
     }
   };
   // Set hasErrors based on whether there are any errors
