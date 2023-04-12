@@ -39,24 +39,22 @@ mongoose
 // require("./userDetails");
 // require("./imageDetails");
 
-app.post('/signup', (req,res)=>{
-  const {fname, lname, email, password , cpassword}=req.body
+  app.post('/signup', async(req,res)=>{
+  const {firstName, lastName, email, password , confrimPassword}=req.body;
      const register = new Register({
-    fname:req.body.fname,
-    lname:req.body.lname,
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
     email:req.body.email,
-    Password:req.body.password,
-    Conformpassword:req.body.Conformpassword
+    password:req.body.password,
+    confrimPassword:req.body.confrimPassword
   });
-  register.save().then((result)=>{
+  
+    await register.save().then((result)=>{
     res.send(result);
   }).catch((err)=>{
     console.log(err);
   })
-
-
-
-  console.log({fname,lname,email,password,Conformpassword})
+  console.log({firstName,lastName,email,password,confrimPassword})
 });
 
 

@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 
 const signup = new mongoose.Schema({
-     fname: String,
-     lname: String,
+    firstName: String,
+    lastName: String,
      email:{ type: String, unique: true},
-     Password: String,
-     Conformpassword: String,
+     password: String,
+     confrimPassword: String,
 
 },
 {
