@@ -71,18 +71,30 @@ const Signup = () => {
       console.log('Form not submitted');
     } else {
       // Submit form
-try{
- await axios.post('http://127.0.0.1:5173/signup',(loginform.firstName,loginform.lastName,loginform.email,loginform.password,loginform.confrimPassword));
-console.log("success");
-navigate('/login');
-console.log('Form submitted');
+      const data={
+        firstName : loginform.firstName,
+        lastName :  loginform.lastName,
+        email:      loginform.email,
+        password:   loginform.password,
+        confrimPassword: loginform.confrimPassword
+      }
+    
+    console.log(data)
+    // console.log(loginform.firstName)
+ await axios.post('http://localhost:5000/signup',data,{
 
-}catch(e){
-  console.error(e);
+    }).then(response => {
+if(response.status=200)
+{
+  navigate('/login')
 }
+else{
+  console.log("not signup")
+}
+      
+    })
 
-    }
-  };
+  };}
   // Set hasErrors based on whether there are any errors
   useEffect(() => {
     hasErrors = !!(errors.firstName || errors.lastName || errors.email || errors.password || errors.confrimPassword);
@@ -97,6 +109,7 @@ console.log('Form submitted');
           <label>First name</label>
           <input
             type='text'
+            value={loginform.firstName}
             className='form-control mb-2'
             placeholder='First name'
             name='firstName'
@@ -109,6 +122,7 @@ console.log('Form submitted');
           <label>Last name</label>
           <input
             type='text'
+            value={loginform.lastName}
             className='form-control mb-2'
             placeholder='Last name'
             name='lastName'
@@ -121,6 +135,7 @@ console.log('Form submitted');
           <label>Email address</label>
           <input
             type='email'
+            value={loginform.email}
             className='form-control mb-2'
             placeholder='Enter email'
             name='email'
@@ -133,6 +148,7 @@ console.log('Form submitted');
           <label>Password</label>
           <input
             type='password'
+            value={loginform.password}
             className='form-control mb-2'
             placeholder='Enter password'
             name='password'
@@ -144,6 +160,7 @@ console.log('Form submitted');
           <label>confirm Password</label>
           <input
             type='password'
+            value={loginform.confrimPassword}
             className='form-control mb-2'
             placeholder='Confirm password'
             name='confrimPassword'
