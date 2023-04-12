@@ -8,7 +8,7 @@ app.use(cors());
 const bcrypt = require("bcryptjs");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-
+const axios = require('axios')
 app.listen(5000,()=>{
   console.log('server started')
 
