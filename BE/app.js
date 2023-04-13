@@ -1,60 +1,145 @@
-const express = require("express");
+const express = require('express');
+const mongoose = require('mongoose');
+const Register = require('./models/signup');
+const CreateGig = require('./models/createGig');
+const multer = require('multer');
+const Grid = require('gridfs-stream');
+const bcrypt = require('bcryptjs');
+const cors = require('cors');
+const axios = require('axios');
 const app = express();
-const mongoose = require("mongoose");
-const Register = require('./models/signup')
 app.use(express.json());
-const cors = require("cors");
 app.use(cors());
-const bcrypt = require("bcryptjs");
-app.set("view engine", "ejs");
+// Create a Multer storage instance
+const storage = multer.memoryStorage();
+// Create a Multer upload instance
+const upload = multer({ storage: storage });
+ mongoose.connect('mongodb+srv://root2hack:11223344@cluster0.qddtl14.mongodb.net/test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const conn = mongoose.connection;
+let gfs;
+
+// create a GridFS storage engine and pass it to GridFS-Stream
+conn.once('open', () => {
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('createGig');
+});
+conn.on('error', console.error.bind(console, 'connection error:'));
+// mongoose.set('strictQuery', false);
+
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
-const axios = require('axios')
-app.listen(5000,()=>{
-  console.log('server started')
+app.listen(5000, () => {
+  console.log('server started');
+});
 
-})
+const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
 
-const jwt = require("jsonwebtoken");
-var nodemailer = require("nodemailer");
+const JWT_SECRET = 'hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe';
 
-const JWT_SECRET =
-  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
-
-const mongoUrl =
-  "mongodb+srv://root2hack:11223344@cluster0.qddtl14.mongodb.net/test";
-  mongoose.set('strictQuery',true),
-
-mongoose
-  .connect(mongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    
-    
-  })
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch((e) => console.log(e));
+const mongoUrl = 'mongodb+srv://root2hack:11223344@cluster0.qddtl14.mongodb.net/test';
+mongoose.set('strictQuery', true),
+  mongoose
+    .connect(mongoUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log('Connected to database');
+    })
+    .catch((e) => console.log(e));
 
 // require("./userDetails");
 // require("./imageDetails");
 
-  app.post('/signup', async(req,res)=>{
-  console.log(req)
-    const {firstName, lastName, email, password , confrimPassword}=req.body;
-     const register = new Register({
-      firstName:req.body.firstName,
-      lastName:req.body.lastName,
-    email:req.body.email,
-    password:req.body.password,
-    confrimPassword:req.body.confrimPassword
+app.post('/signup', async (req, res) => {
+  console.log(req);
+  const { firstName, lastName, email, password, confrimPassword } = req.body;
+  const register = new Register({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    confrimPassword: req.body.confrimPassword,
   });
-    await register.save().then((register)=>{
-    res.send({data:'success signup',status:200});
-  }).catch((err)=>{
-    console.log(err);
-  })
+  await register
+    .save()
+    .then((register) => {
+      res.send({ data: 'success signup', status: 200 });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
+app.post('/create-gig', async (req, res) => {
+  console.log(req);
+  // Use the Multer upload instance to handle the file upload
+  upload.single('image')(req, res, function (err) {
+    if (err) {
+      // Handle the error if the file upload fails
+      console.error(err);
+      return res.status(400).send('Error uploading file');
+    }
+
+    // Create a new Image instance with the file data
+    const image = new CreateGig({
+      title: req.body.title,
+      price: req.body.price,
+      description: req.body.description,
+      name: req.file.originalname,
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    });
+
+    // Save the image to MongoDB
+    image.save(function (err) {
+      if (err) {
+        // Handle the error if the image save fails
+        console.error(err);
+        return res.status(400).send('Error saving image to database');
+      }
+
+      // Return a success response
+      res.status(200).send('Image saved successfully');
+    });
+  });
+});
+
+app.get('/gigs', async (req, res) => {
+  try {
+    const gigs = await CreateGig.find();
+console.log(gigs);
+    const files = await gfs.files.find().toArray();
+    const fileUrls = gigs.map((file) => `/gigs/${file.name}`);
+
+    res.json(fileUrls);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving products');
+  }
+});
+
+// this route will retrieve the image file with the given filename
+app.get('/gigs/:filename', async (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const readstream = gfs.createReadStream({ filename: filename });
+
+    // Set the response content type to the image MIME type
+    res.set('Content-Type', 'image/jpeg');
+
+    // Pipe the GridFS stream to the response
+    readstream.pipe(res);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving products');
+  }
+});
+
 
 
 // app.post("/register", async (req, res) => {
@@ -235,7 +320,6 @@ mongoose
 //     console.log(error);
 //   }
 // });
-
 
 // app.post("/upload-image", async (req, res) => {
 //   const { base64 } = req.body;
