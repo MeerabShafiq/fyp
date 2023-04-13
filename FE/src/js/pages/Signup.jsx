@@ -3,6 +3,7 @@ import { Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 //styles
 import styles from '../../scss/pages/login.module.scss';
+import Sstyles from '../../scss/pages/signin.module.scss';
 import axios from 'axios'
 
 const Signup = () => {
@@ -26,7 +27,23 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
+    
   };
+  
+  //signup button fucntion
+  const loginf=()=>{
+    navigate('/login');
+  }
+  //facebook button
+
+  const fb_login=()=>{
+  
+      window.location.href ="https://www.facebook.com"
+    
+   
+  }
+ 
+
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
@@ -99,6 +116,7 @@ else{
   useEffect(() => {
     hasErrors = !!(errors.firstName || errors.lastName || errors.email || errors.password || errors.confrimPassword);
   }, [errors]);
+
 
   return (
     <Container className={styles.container}>
@@ -174,10 +192,19 @@ else{
             Sign Up
           </button>
         </div>
-
-        <p className='forgot-password text-right'>
+       
+        <div className='d-grid' >
+          <a>Already registered?</a>
+          <button type='submit' className={Sstyles.signupb}
+          onClick={loginf}>
+         Click here
+          </button>
+        </div>
+<div>
+</div>
+        {/* <p className='forgot-password text-right'>
           Already registered <a href='/login'>sign in?</a>
-        </p>
+        </p> */}
       </Form>
     </Container>
   );
