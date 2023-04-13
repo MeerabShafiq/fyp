@@ -13,10 +13,15 @@ const AddUpdategig = () => {
   };
   const goBack = () => navigate(-1);
 
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     console.log('Selected file:', selectedFile);
   };
+
   return (
     <Container className='px-5'>
       <h2 className={clsx(styles.cardTitle, 'py-5')} onClick={goBack}>
@@ -33,16 +38,21 @@ const AddUpdategig = () => {
             <Form.Group className='mb-3 d-flex'>
               <Form.Control as='textarea' placeholder='Description' style={{ height: '100px' }} name='description' />
             </Form.Group>
-            <Form.Group >
-              <Form.Control className='d-none' id='addfile' name='file' ref={fileInputRef} type='file' onChange={handleFileChange} />
-            <Button className={styles.bordered_button} hmlFor='input-id'>
-              +
-            </Button>
-            </Form.Group>
 
-            <Button>
-              Create Gig
-            </Button>
+            <Form.Group>
+              <Form.Control
+                className='d-none'
+                id='addfile'
+                name='file'
+                ref={fileInputRef}
+                type='file'
+                onChange={handleFileChange}
+              />
+              <Button className={styles.bordered_button} onClick={handleButtonClick}>
+                +
+              </Button>
+            </Form.Group>
+            <Button>Create Gig</Button>
           </Form>
         </Card.Body>
       </Card>

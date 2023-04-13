@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import Navbar from '../components/navbar/Navbar';
-import GigWrapper from '../home/components/GigWrapper';
+import GigWrapper from '../components/components/GigWrapper';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
