@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import { Card, Container } from 'react-bootstrap';
-import styles from '../gigDetail/gigdetail.module.css'
+import styles from '../../scss/pages/gigdetail.module.scss'
 import clsx from 'clsx';
 
 const GigDetail = () => {

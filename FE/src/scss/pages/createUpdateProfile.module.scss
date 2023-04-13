@@ -1,0 +1,45 @@
+.header{
+    margin-top: 20px;
+    padding: 10px 10px;
+    background-color: rgb(18 57 110);
+    color: white;
+    border-top-left-radius:15px ;
+    border-top-right-radius:15px ;
+}
+.container{
+    padding: 5rem;
+    width: 70%;
+}
+.username{
+    color:rgba(18, 56, 110, 0.854) ;
+}
+.usermail{
+    color:rgba(18, 56, 110, 0.465) ;
+}
+.degreename{
+    input{
+        margin-top: .5rem;
+    }
+}
+.certification{
+    border: 3px dotted rgba(128, 128, 128, 0.56);
+    border-radius: 5px;
+}
+.bordered_button {
+    margin: 2px 5px;
+    border:  none;
+    padding: 1px !important;
+    height: 30px !important;
+    width: 30px !important;
+    color: black !important;
+    background-color: rgba(128, 128, 128, 0.711) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+}
+
+.bordered_button:hover {
+    background-color: gray !important;
+    border: none;
+    color: black !important;
+}

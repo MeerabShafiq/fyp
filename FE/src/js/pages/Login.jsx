@@ -8,21 +8,40 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [loginform, setLoginform] = useState({ email: '', password: '' });
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
+  const [emailerror, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (loginform.email === '' || loginform.password === '') {
-      setErrorMessage('field is empty');
+    let isValid = true;
+  
+    if (loginform.email.trim() === '') {
+      setEmailError('email is required');
+      isValid = false;
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(loginform.email)) {
+      setEmailError('Invalid email address');
+      isValid = false;
     } else {
-      alert('login');
+      setEmailError('');
     }
-
-    loginform.email && loginform.password && navigate('/home');
+  
+    if (loginform.password.trim() === '') {
+      setPasswordError('password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+  
+    if (loginform.email && loginform.password && isValid) {
+      navigate('/home');
+    }
   };
+  
   return (
     <Container className={styles.container}>
       <form className={styles.formContainer}>
@@ -39,7 +58,7 @@ const Login = () => {
             onChange={handleChange}
           />
 
-          <div style={{ color: 'red' }}>{errorMessage}</div>
+        {emailerror &&<div style={{color:"red"}}>{emailerror}</div>}
         </div>
 
         <div className='mb-3'>
@@ -52,7 +71,7 @@ const Login = () => {
             value={loginform.password}
             onChange={handleChange}
           />
-          <div style={{ color: 'red' }}>{errorMessage}</div>
+           {passwordError &&<div style={{color:"red"}}>{passwordError}</div>}
         </div>
 
         <div className='mb-3'>

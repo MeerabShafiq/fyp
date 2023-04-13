@@ -5,6 +5,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import AddUpdategig from '../pages/AddUpdategig'
+import CreateUpdateProfile from '../pages/CreateUpdateProfile'
 
 const Router = () => {
   return (
@@ -16,6 +17,8 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/create-profile" element={<CreateUpdateProfile />} />
+
     </Routes>
   )
 }
