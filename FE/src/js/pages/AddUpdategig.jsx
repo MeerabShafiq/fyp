@@ -8,9 +8,6 @@ const AddUpdategig = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
   const goBack = () => navigate(-1);
 
   const handleButtonClick = () => {

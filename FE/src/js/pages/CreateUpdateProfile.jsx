@@ -4,7 +4,25 @@ import styles from '../../scss/pages/createUpdateProfile.module.scss';
 import clsx from 'clsx';
 const CreateUpdateProfile = () => {
   const fileInputRef = useRef(null);
-  const handleImageChange = () => {};
+  const colaborationRef = useRef(null);
+//Set Ref on click
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+  const handleCertificateClick = () => {
+    colaborationRef.current.click();
+  };
+
+//upload file
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    console.log('Selected file:', selectedFile);
+  };
+  const handleFileColabration = (event) => {
+    const selectedFile = event.target.files[0];
+    console.log('Selected file:', selectedFile);
+  };
+
   return (
     <Container>
       <h2 className={styles.header}>Create Profile: </h2>
@@ -12,13 +30,13 @@ const CreateUpdateProfile = () => {
         <div className='d-flex mt-5 mb-5'>
           <Form.Group className='mb-3 '>
             <Form.Control
-            type='file'
+              type='file'
               id='upload-image'
               label='Upload an image'
-              onChange={handleImageChange}
+              onChange={handleFileChange}
               className='d-none'
             />
-            <div htmlFor='upload-image'>
+            <div htmlFor='upload-image' onClick={handleButtonClick}>
               <img src='https://dummyimage.com/80x80/000/fff' alt='' className='rounded-circle' />
             </div>
           </Form.Group>
@@ -41,20 +59,20 @@ const CreateUpdateProfile = () => {
             </Form.Group>
             <Row>
               <Col>
-              <Form.Group className={styles.degreename}>
-                <Form.Label> </Form.Label>
-                <Form.Control placeholder='Dgree Name' name='degree' />
-              </Form.Group>
-              </Col> 
+                <Form.Group className={styles.degreename}>
+                  <Form.Label> </Form.Label>
+                  <Form.Control placeholder='Dgree Name' name='degree' />
+                </Form.Group>
+              </Col>
               <Col>
-              <Form.Group className={clsx(styles.degreeduration,'mb-3 ps-5')}>
-                <Form.Label>Duration</Form.Label>
-                <div className='mb-3 d-flex'>
-                  <Form.Control type='date' placeholder='From' name='description' className='me-3' />
-                  <Form.Control type='date' placeholder='to' name='description' />
-                </div>
-              </Form.Group>
-              </Col> 
+                <Form.Group className={clsx(styles.degreeduration, 'mb-3 ps-5')}>
+                  <Form.Label>Duration</Form.Label>
+                  <div className='mb-3 d-flex'>
+                    <Form.Control type='date' placeholder='From' name='description' className='me-3' />
+                    <Form.Control type='date' placeholder='to' name='description' />
+                  </div>
+                </Form.Group>
+              </Col>
             </Row>
             <h2>Industurial Information</h2>
             <Form.Group className='mb-3'>
@@ -70,9 +88,16 @@ const CreateUpdateProfile = () => {
             </Form.Group>
             <Form.Group className='d-block mb-4'>
               <Form.Label>Certification</Form.Label>
-              <Form.Control className='d-none' id='input-id' name='file' ref={fileInputRef} type='file' />
+              <Form.Control
+                className='d-none'
+                id='colaboration-id'
+                name='file'
+                ref={colaborationRef}
+                type='file'
+                onChange={handleFileColabration}
+              />
               <div className={styles.certification}>
-                <Button className={styles.bordered_button} htmlFor='input-id'>
+                <Button className={styles.bordered_button} htmlFor='colaboration-id' onClick={handleCertificateClick}>
                   +
                 </Button>
               </div>
@@ -80,7 +105,7 @@ const CreateUpdateProfile = () => {
             <Form.Group className='mb-3 d-flex'>
               <Form.Control as='textarea' placeholder='Description' style={{ height: '100px' }} name='description' />
             </Form.Group>
-            <Button>Nex</Button>
+            <Button>Next</Button>
           </Form>
         </div>
       </div>
