@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-const ReadMore = ({ text, maxLength }) => {
+const ReadMore = ({ text='', maxLength }) => {
   const [isTruncated, setIsTruncated] = useState(true);
 
   const toggleTruncate = () => {
     setIsTruncated(!isTruncated);
   };
 
-  const truncatedText = text.slice(0, maxLength);
-  const displayText = isTruncated ? truncatedText + '...' : text;
+  const truncatedText = text?.length>50? text.slice(0, maxLength):text;
+  const displayText = !isTruncated ? truncatedText + '...' : text;
 
   return (
     <>

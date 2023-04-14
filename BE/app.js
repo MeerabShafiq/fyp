@@ -112,11 +112,16 @@ app.post('/create-gig', async (req, res) => {
 app.get('/gigs', async (req, res) => {
   try {
     const gigs = await CreateGig.find();
-console.log(gigs);
     const files = await gfs.files.find().toArray();
-    const fileUrls = gigs.map((file) => `/gigs/${file.name}`);
+    const fileUrls = files.map((file) => `/gigs/${file.filename}`);
 
-    res.json(fileUrls);
+    const gigsWithUrls = gigs.map((gig) => {
+      const file = files.find((f) => f.metadata.gigId.toString() === gig._id.toString());
+      const url = file ? `/gigs/${file.filename}` : null;
+      return { ...gig._doc, imageUrl: url };
+    });
+
+    res.json(gigsWithUrls);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error retrieving products');
@@ -139,6 +144,7 @@ app.get('/gigs/:filename', async (req, res) => {
     res.status(500).send('Error retrieving products');
   }
 });
+
 
 
 
