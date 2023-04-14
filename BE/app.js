@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Register = require('./models/signup');
+const login = require('./models/login');
 const CreateGig = require('./models/createGig');
 const multer = require('multer');
 const Grid = require('gridfs-stream');
@@ -10,6 +11,11 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+const Signupmiddleware = require('./middleware/signupMiddleware')
+const loginmiddleware = require('./middleware/loginMiddleware')
+
+
 // Create a Multer storage instance
 const storage = multer.memoryStorage();
 // Create a Multer upload instance
@@ -56,25 +62,22 @@ mongoose.set('strictQuery', true),
 // require("./userDetails");
 // require("./imageDetails");
 
-app.post('/signup', async (req, res) => {
-  console.log(req);
-  const { firstName, lastName, email, password, confrimPassword } = req.body;
-  const register = new Register({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    confrimPassword: req.body.confrimPassword,
-  });
-  await register
-    .save()
-    .then((register) => {
-      res.send({ data: 'success signup', status: 200 });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+//signup middleware
+app.post('/signup',Signupmiddleware);
+
+
+//login middleware
+app.post('/login',loginmiddleware);
+
+
+
+
+
+
+
+
+
+
 app.post('/create-gig', async (req, res) => {
   console.log(req);
   // Use the Multer upload instance to handle the file upload
