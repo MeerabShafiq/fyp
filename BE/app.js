@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Register = require('./models/signup');
-const login = require('./models/login');
-const CreateGig = require('./models/createGig');
+const Register = require('./models/signup.model');
+const login = require('./models/login.model');
+const CreateGig = require('./models/createGig.model');
 const multer = require('multer');
 const Grid = require('gridfs-stream');
 const bcrypt = require('bcryptjs');
@@ -11,9 +11,8 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-const Signupmiddleware = require('./middleware/signupMiddleware')
-const loginmiddleware = require('./middleware/loginMiddleware')
+const loginRoute = require("./routes/login.route.js");
+const signupRoute = require('./routes/signup.route')
 
 
 // Create a Multer storage instance
@@ -63,11 +62,8 @@ mongoose.set('strictQuery', true),
 // require("./imageDetails");
 
 //signup middleware
-app.post('/signup',Signupmiddleware);
-
-
 //login middleware
-app.post('/login',loginmiddleware);
+app.use("/",loginRoute);
 
 
 
