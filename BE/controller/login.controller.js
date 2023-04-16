@@ -1,27 +1,43 @@
 
 const express = require('express');
 const cors = require('cors');
-const login = require('../models/login.model')
+const Login = require('../models/login.model')
 const app = express();
 app.use(cors());
 
 exports.login = async (req,res,next)=>{
+   const email = req.body.email;
+    await Login.findOne({email}).then(data=>{
+          if(data.length){
+          
+            res.json({
+                
+                status:"success",
+                message:"login success",
+                data:data
+            })
+            
+          } 
+         
+          else {
+            console.log(data)
+            res.json({
+                status:"failed",
+                message:"error occured druing verification"
+            })
+        }  
 
-   
-     await login.findOne({email: req.body.email}).then(result=>{
-        if(result.length){
-            res.send({data:"user already exixts"})
-        }
-        else{
-            res.send({data:"can login"})
-        }
-     }).catch(err=>{
-        res.send({status:"failed"})
-     })
+    })
+    .catch(error=>{
+        res.json({
+            status:"Failed",
+            message:"error occured"
+        })
+       
 
-}
-
-
+    })
+} 
+ 
 
 
          

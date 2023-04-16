@@ -17,12 +17,24 @@ exports.signup =async (req, res) => {
        await Register.find({email,firstName,lastName}).then(result=>{
         if(result.length){
           console.log(email,firstName,lastName)
+          if(result==Register.firstName || result==Register.lastName || result==Register.email){
           res.send({data:"user alerady exits"})
-        
+          }
+          else{
+            res.json({message:"alreaday there"})
+          }
         }
         else{
-          res.send({data:"can login"})
+          register.save().then((result)=>{
+            if(result){
+              res.json({message:"success"})
+            }
+          });
+          
+        
+        
         }
+
       }).catch(err=>{
         res.send({data:"failed"})
       })
