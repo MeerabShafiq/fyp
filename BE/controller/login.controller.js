@@ -7,65 +7,26 @@ app.use(cors());
 
 exports.login = async (req,res,next)=>{
 
-    
-    const isValid= await login.find(({email,password})=>{
-         email===req.body.email && password===req.body.password
-        
-    })
-
-   console.log(isValid)
-    if(!isValid){
-        res.send({data:"not valid user ",status:404})
-    }
-    if
-        (isValid)
-        {
-            res.send({data:"valid and login", status:200})
-                        
+   
+     await login.findOne({email: req.body.email}).then(result=>{
+        if(result.length){
+            res.send({data:"user already exixts"})
         }
-    
-
-    //   isValid.save().then((result)=>{
-    //     if (result) {
-    //         res.json({ message: "registered successfully" });
-    //     }
-    //     })
+        else{
+            res.send({data:"can login"})
+        }
+     }).catch(err=>{
+        res.send({status:"failed"})
+     })
 
 }
 
 
 
-// const l=( async (req, res) => {
-//     const {email,password}=req.body;
-//     const register = new lRegister({
-//         email : req.body.email,
-//         password: req.body.password,
-//     });
-    
 
-//      User.findOne({email},(err, user)=>{
-// if(err){
-//      res.status(500).send("error")
-// }
-// if(!user){
-//     res.send({data:"user not found", status:404})
-// }
-// if(user){
-        
-//         res.send({data:"user already exists",status:400})
-// }
-         
-//     register.save().then((register)=>{
-//         res.send({data:"success login", status:200})
-//         next();
-//     })
-   
-    
-//      })
          
     
 
  
     
-    
-// })
+
