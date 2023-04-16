@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const Register = require('./models/signup.model');
 const login = require('./models/login.model');
 const CreateGig = require('./models/createGig.model');
@@ -61,10 +62,15 @@ mongoose.set('strictQuery', true),
 // require("./userDetails");
 // require("./imageDetails");
 
-//signup middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 //login middleware
 app.use("/",loginRoute);
+//signup middleware
 app.use("/",signupRoute)
+
 
 
 

@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 //styles
 import styles from '../../scss/pages/login.module.scss';
+import { fetchrequest } from '../../function';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,15 +12,14 @@ const Login = () => {
   // const [errorMessage, setErrorMessage] = useState('');
   const [emailerror, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     let isValid = true;
-  
+
     if (loginform.email.trim() === '') {
       setEmailError('email is required');
       isValid = false;
@@ -29,19 +29,21 @@ const Login = () => {
     } else {
       setEmailError('');
     }
-  
+
     if (loginform.password.trim() === '') {
       setPasswordError('password is required');
       isValid = false;
     } else {
       setPasswordError('');
     }
-  
+
     if (loginform.email && loginform.password && isValid) {
-      navigate('/home');
+      await fetchrequest({ endpoint: 'login', method: 'post', data: { ...loginform } }).then((res) => {
+        if (res.data.success) navigate('/home');
+      });
     }
   };
-  
+
   return (
     <Container className={styles.container}>
       <form className={styles.formContainer}>
@@ -58,7 +60,7 @@ const Login = () => {
             onChange={handleChange}
           />
 
-        {emailerror &&<div style={{color:"red"}}>{emailerror}</div>}
+          {emailerror && <div style={{ color: 'red' }}>{emailerror}</div>}
         </div>
 
         <div className='mb-3'>
@@ -71,7 +73,7 @@ const Login = () => {
             value={loginform.password}
             onChange={handleChange}
           />
-           {passwordError &&<div style={{color:"red"}}>{passwordError}</div>}
+          {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
         </div>
 
         <div className='mb-3'>

@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 //styles
 import styles from '../../scss/pages/login.module.scss';
 import Sstyles from '../../scss/pages/signin.module.scss';
-import axios from 'axios'
+import axios from 'axios';
+import { fetchrequest } from '../../function';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -27,25 +28,19 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
-    
   };
-  
+
   //signup button fucntion
-  const loginf=()=>{
+  const loginf = () => {
     navigate('/login');
-  }
+  };
   //facebook button
 
-  const fb_login=()=>{
-  
-      window.location.href ="https://www.facebook.com"
-    
-   
-  }
- 
+  const fb_login = () => {
+    window.location.href = 'https://www.facebook.com';
+  };
 
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!loginform.firstName.trim()) {
       setErrors((p) => ({ ...p, firstName: 'First Name is required' }));
@@ -88,35 +83,27 @@ const Signup = () => {
       console.log('Form not submitted');
     } else {
       // Submit form
-      const data={
-        firstName : loginform.firstName,
-        lastName :  loginform.lastName,
-        email:      loginform.email,
-        password:   loginform.password,
-        confrimPassword: loginform.confrimPassword
-      }
-    
-    console.log(data)
-    // console.log(loginform.firstName)
- await axios.post('http://localhost:5000/signup',data,{
+      const data = {
+        firstName: loginform.firstName,
+        lastName: loginform.lastName,
+        email: loginform.email,
+        password: loginform.password,
+        confrimPassword: loginform.confrimPassword,
+      };
 
-    }).then(response => {
-if(response.status=200)
-{
-  navigate('/login')
-}
-else{
-  console.log("not signup")
-}
-      
-    })
-
-  };}
+      fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
+        if ((response.status = 200)) {
+          navigate('/login');
+        } else {
+          console.log('not signup');
+        }
+      });
+    }
+  };
   // Set hasErrors based on whether there are any errors
   useEffect(() => {
     hasErrors = !!(errors.firstName || errors.lastName || errors.email || errors.password || errors.confrimPassword);
   }, [errors]);
-
 
   return (
     <Container className={styles.container}>
@@ -192,19 +179,13 @@ else{
             Sign Up
           </button>
         </div>
-       
-        <div className='d-grid' >
+
+        <div className='d-grid'>
           <a>Already registered?</a>
-          <button type='submit' className={Sstyles.signupb}
-          onClick={loginf}>
-         Click here
+          <button type='submit' className={Sstyles.signupb} onClick={loginf}>
+            Click here
           </button>
         </div>
-<div>
-</div>
-        {/* <p className='forgot-password text-right'>
-          Already registered <a href='/login'>sign in?</a>
-        </p> */}
       </Form>
     </Container>
   );
