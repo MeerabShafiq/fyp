@@ -64,6 +64,7 @@ mongoose.set('strictQuery', true),
 //signup middleware
 //login middleware
 app.use("/",loginRoute);
+app.use("/",signupRoute)
 
 
 

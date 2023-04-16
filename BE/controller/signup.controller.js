@@ -1,13 +1,10 @@
 const Register = require('../models/signup.model');
 const express = require('express');
-const  User  = require('../models/login.model.');
 const cors = require('cors');
 const app = express();
 app.use(cors());
 
-const M=(async (req, res) => {
-    console.log(req);
-    
+exports.signup =async (req, res) => {
     const { firstName, lastName, email, password, confrimPassword } = req.body;
     const register = new Register({
       firstName: req.body.firstName,
@@ -17,21 +14,17 @@ const M=(async (req, res) => {
       confrimPassword: req.body.confrimPassword,
   
     });
-       const user = await User.findOne({email},(err)=>{
-   
-        if(err){
-          res.status(500).send("error")
+       await Register.find({email,firstName,lastName}).then(result=>{
+        if(result.length){
+          console.log(email,firstName,lastName)
+          res.send({data:"user alerady exits"})
+        
         }
-       
-        if(user){
-          res.send({data:"user already exists",status:"200"})
-        res.send(user)
+        else{
+          res.send({data:"can login"})
         }
-        else {
-          res.send({data:"not"})
-        }
-        console.log(user)
-
+      }).catch(err=>{
+        res.send({data:"failed"})
       })
     
 
@@ -62,5 +55,4 @@ const M=(async (req, res) => {
 //  })
 
  
-  });
-  module.exports = M;
+  };
