@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'secretkey');
 const login = new User({userId: user._id, token: token, email: user.email, })
     // Save token to user document
-    await login.save();
+    // await login.save();
     console.log('Token saved to user:', login);
     // Send response with user data and token
     res.status(200).json({ userId: user._id, token: token, email: user.email, success:true });
