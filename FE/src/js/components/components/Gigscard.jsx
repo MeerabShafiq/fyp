@@ -5,20 +5,22 @@ import ReadMore from '../../components/core/global/ReadMore';
 import { fetchrequest } from '../../../function';
 
 const Gigscard = () => {
+  const [loading, setLoading]=useState(false)
   const [gigs, setGigs]=useState([])
   useEffect(() => {
+    setLoading(true)
     fetchrequest({
       endpoint:'gigs'
     }).then((res) => {
       setGigs(res.data);
-      console.log(res.data);
+      setLoading(false)
     })
   }, [])
 
   return (
     <Container>
       <Row>
-        {gigs.map((gig,i) => (
+        {loading?<div className='p-5'>loading...</div>:gigs.map((gig,i) => (
           <Col md={4} key={i} className='p-2'>
             <Card className='p-2'>
               <img src='https://dummyimage.com/600x600/000/fff' alt='' className='rounded-4' />

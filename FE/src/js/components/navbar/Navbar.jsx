@@ -10,7 +10,7 @@ import styles from '../../../scss/components/navbar/navbar.module.scss';
 import RoundImage from '../core/profile/RoundImage';
 import Image from '../svgbtn/SvgButton';
 
-const CNavbar = () => {
+const CNavbar = ({ setBuyer, buyer }) => {
   return (
     <Navbar expand='lg' className={styles.nav_container}>
       <Container fluid>
@@ -37,14 +37,21 @@ const CNavbar = () => {
             </Nav.Link>
             <Nav.Link href='#action2' className='mx-3'>
               <div>
-              <img className='' src={message} width='30' height='38' />
-              <div className={styles.messageonline} />
+                <img className='' src={message} width='30' height='38' />
+                <div className={styles.messageonline} />
               </div>
             </Nav.Link>
-            <Nav.Link href='#' className={clsx(styles.pnav_color, 'mx-3')}>
-              Switch to Buyer
-              <div className={styles.profileOnline} />
-            </Nav.Link>
+            {buyer ? (
+              <Nav.Link className={clsx(styles.pnav_color, 'mx-3')} onClick={() => setBuyer(false)}>
+                Switch to Seller
+                <div className={styles.profileOnline} />
+              </Nav.Link>
+            ) : (
+              <Nav.Link className={clsx(styles.pnav_color, 'mx-3')} onClick={() => setBuyer(true)}>
+                Switch to Buyer
+                <div className={styles.profileOnline} />
+              </Nav.Link>
+            )}
             <Nav.Link href='#' className={clsx(styles.pnav_color, 'mx-3')}>
               <div className='position-relative'>
                 <RoundImage />

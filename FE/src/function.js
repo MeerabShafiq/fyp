@@ -20,9 +20,7 @@ import axios from "axios";
   
 export const fetchrequest = async ({ method = 'get', path, data, endpoint, res, ...params }) => {
     // let url = 'https:/' + makePath(getURL(), endpoint);
-    let url = ('http://localhost:5000/'+ endpoint);
-
-  console.log(url);
+    let url = ('http://localhost:4000/'+ endpoint);
     // try {
     return data
       ? axios[method](url, data, {

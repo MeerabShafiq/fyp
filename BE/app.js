@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 const loginRoute = require("./routes/login.route.js");
 const signupRoute = require('./routes/signup.route')
-
+const stripRoute = require('./routes/strip.route.js')
 
 // Create a Multer storage instance
 const storage = multer.memoryStorage();
@@ -38,7 +38,7 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
-app.listen(5000, () => {
+app.listen(4000, () => {
   console.log('server started');
 });
 
@@ -70,6 +70,8 @@ app.use(bodyParser.json());
 app.use("/",loginRoute);
 //signup middleware
 app.use("/",signupRoute)
+//signup middleware
+app.use("/",stripRoute)
 
 
 
