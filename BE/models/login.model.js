@@ -1,25 +1,3 @@
-// const mongoose = require('mongoose');
-
-
-// const login = new mongoose.Schema({
-//      email:
-//      { type: String, 
-//        unique: true,
-//        required: true
-//      },
-//      password: {   
-//         type: String,
-//         required: true
-    
-//     }
-
-// },
-// {
-//     collection:"Login",
-// }
-// );
-// const Login = mongoose.model("login", login);
-// module.exports = Login;
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -29,8 +7,8 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   userId: {
-    type: String,
-    required: true
+    type: Number,
+    required: true,
   },
   token: {
     type: String,
@@ -38,6 +16,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('login', userSchema);
 
 module.exports = User;

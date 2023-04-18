@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const createGig = new mongoose.Schema(
   {
+    userId:Number,
     title:String,
     price:Number,
     description:String,
