@@ -13,10 +13,10 @@ const Gigscard = ({buyer}) => {
     fetchrequest({
       endpoint:buyer?`gigs/${userId}`:'gigs'
     }).then((res) => {
-      setGigs(res.data);
+      setGigs(res.data.results||[]);
       setLoading(false)
     })
-  }, [])
+  }, [buyer])
 
   return (
     <Container>

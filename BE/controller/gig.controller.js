@@ -61,7 +61,7 @@ exports.get = async (req, res) => {
   try {
     if(userId){
       const gigs = await CreateGig.find({ userId });
-      res.status(200).send.json({success:true, results:gigs})
+      res.send({success:true, results:gigs})
       // res.json(gigs)
     }
     else{
@@ -74,7 +74,7 @@ exports.get = async (req, res) => {
       const url = file ? `/gigs/${file.filename}` : null;
       return { ...gig._doc, imageUrl: url };
     });
-    res.json(gigsWithUrls);
+    res.json({success:true, results:gigsWithUrls});
   }
   } catch (err) {
     console.error(err);
