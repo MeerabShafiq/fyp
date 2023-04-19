@@ -91,7 +91,7 @@ const Login = () => {
           </button>
         </div>
         <p className='forgot-password text-right'>
-          Forgot password <Link to='#'> password Reset</Link>
+        Switch to seller<Link to='/buyer'> HERE</Link>
         </p>
         <p className={styles.signup}>
           New User? <a href='/signup'>Sign up </a>
