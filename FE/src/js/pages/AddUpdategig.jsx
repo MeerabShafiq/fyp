@@ -34,10 +34,13 @@ const AddUpdategig = () => {
     const isSubmit = gig.title&&gig.description&& gig.price&& gig.image
     console.log(gig, );
     isSubmit&& await fetchrequest({
-      method:'post', endpoint:'create-gig', data:formData
+      method:'post', endpoint:'create-gig', data:formData 
     }).then((res) => {
+      navigate('/home') 
       console.log(res);
     });
+
+    
   };
   return (
     <Container className='px-5'>
@@ -76,7 +79,7 @@ const AddUpdategig = () => {
                 +
               </Button>
             </Form.Group>
-            <Button type='submit'>Create Gig</Button>
+            <Button type='submit' onClick={handleSubmit}>Create Gig</Button>
           </Form>
         </Card.Body>
       </Card>
