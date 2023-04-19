@@ -6,7 +6,7 @@ import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import AddUpdategig from '../pages/AddUpdategig'
 import CreateUpdateProfile from '../pages/CreateUpdateProfile'
-
+import Buyer from "../pages/Buyer"
 const Router = () => {
   const [buyer, setBuyer] = useState(false)
 console.log(buyer);
@@ -20,7 +20,7 @@ console.log(buyer);
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home setBuyer={setBuyer} buyer={buyer}/>} />
       <Route path="/create-profile" element={<CreateUpdateProfile />} />
-
+      <Route path="/buyer" element={<Buyer />} />
     </Routes>
   )
 }
