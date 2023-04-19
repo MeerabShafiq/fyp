@@ -16,7 +16,7 @@ const Login = () => {
   const handleChange = (e) => {
     setLoginform((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let isValid = true;
 
@@ -39,7 +39,17 @@ const Login = () => {
 
     if (loginform.email && loginform.password && isValid) {
       await fetchrequest({ endpoint: 'login', method: 'post', data: { ...loginform } }).then((res) => {
-        if (res.data.success) navigate('/home');
+        if (res.data.success) {
+          localStorage.setItem(
+            'user-token',
+            JSON.stringify({
+              userId: res.data.userId,
+              token: res.data.token,
+              email: res.data.email,
+            })
+          );
+          navigate('/home');
+        }
       });
     }
   };
@@ -91,10 +101,10 @@ const Login = () => {
           </button>
         </div>
         <p className='forgot-password text-right'>
-        Switch to seller<Link to='/buyer'> HERE</Link>
+          Switch to seller<Link to='/buyer'> HERE</Link>
         </p>
         <p className={styles.signup}>
-          New User? <a href='/signup'>Sign up </a>
+          New User? <Link to='/signup'>Sign up </Link>
         </p>
       </form>
     </Container>

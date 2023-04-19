@@ -25,11 +25,10 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: 'Authentication failed. Wrong password.' });
       }
       const token = jwt.sign({ userId: user._id }, 'secretkey');
-      const login = new User({ userId: req.body.userId, token: token, email: req.body.email });
-
+      const login = new User({ userId: user.userId, token: token, email: req.body.email });
       login.save().then((result) => {
         if (result) {
-          res.status(200).json({ userId: user.userId, token: token, email: user.email, success: true });
+          res.send({ userId: user.userId, token: token, email: user.email, success: true });
         }
       });
     }

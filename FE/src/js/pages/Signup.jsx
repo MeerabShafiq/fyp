@@ -3,8 +3,8 @@ import { Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 //styles
 import styles from '../../scss/pages/login.module.scss';
-import Sstyles from '../../scss/pages/signin.module.scss';
-import axios from 'axios';
+import style from '../../scss/pages/signin.module.scss';
+//function
 import { fetchrequest } from '../../function';
 
 const Signup = () => {
@@ -16,14 +16,14 @@ const Signup = () => {
     lastName: '',
     email: '',
     password: '',
-    confrimPassword: '',
+    confirmPassword: '',
   });
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    confrimPassword: '',
+    confirmPassword: '',
   });
 
   const handleChange = (e) => {
@@ -72,11 +72,11 @@ const Signup = () => {
     } else {
       setErrors((p) => ({ ...p, password: '' }));
     }
-    if (loginform.confrimPassword !== loginform.password || !loginform.confrimPassword) {
-      setErrors((p) => ({ ...p, confrimPassword: 'Confirm Password does not match with Password' }));
+    if (loginform.confirmPassword !== loginform.password || !loginform.confirmPassword) {
+      setErrors((p) => ({ ...p, confirmPassword: 'Confirm Password does not match with Password' }));
       hasErrors = true;
     } else {
-      setErrors((p) => ({ ...p, confrimPassword: '' }));
+      setErrors((p) => ({ ...p, confirmPassword: '' }));
     }
 
     if (hasErrors) {
@@ -88,7 +88,7 @@ const Signup = () => {
         lastName: loginform.lastName,
         email: loginform.email,
         password: loginform.password,
-        confrimPassword: loginform.confrimPassword,
+        confirmPassword: loginform.confirmPassword,
       };
 
       fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
@@ -102,7 +102,7 @@ const Signup = () => {
   };
   // Set hasErrors based on whether there are any errors
   useEffect(() => {
-    hasErrors = !!(errors.firstName || errors.lastName || errors.email || errors.password || errors.confrimPassword);
+    hasErrors = !!(errors.firstName || errors.lastName || errors.email || errors.password || errors.confirmPassword);
   }, [errors]);
 
   return (
@@ -165,13 +165,13 @@ const Signup = () => {
           <label>confirm Password</label>
           <input
             type='password'
-            value={loginform.confrimPassword}
+            value={loginform.confirmPassword}
             className='form-control mb-2'
             placeholder='Confirm password'
-            name='confrimPassword'
+            name='confirmPassword'
             onChange={handleChange}
           />
-          {errors.confrimPassword && <span className={styles.error}>{errors.confrimPassword}</span>}
+          {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
         </div>
 
         <div className='d-grid'>
@@ -182,7 +182,7 @@ const Signup = () => {
 
         <div className='d-grid'>
           <a>Already registered?</a>
-          <button type='submit' className={Sstyles.signupb} onClick={loginf}>
+          <button type='submit' className={style.signupb} onClick={loginf}>
             Click here
           </button>
         </div>
