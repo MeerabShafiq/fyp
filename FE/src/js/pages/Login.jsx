@@ -101,7 +101,7 @@ const Login = () => {
           </button>
         </div>
         <p className='forgot-password text-right'>
-          Switch to seller<Link to='/buyer'> HERE</Link>
+          Switch to Buyer<Link to='/buyer'> HERE</Link>
         </p>
         <p className={styles.signup}>
           New User? <Link to='/signup'>Sign up </Link>

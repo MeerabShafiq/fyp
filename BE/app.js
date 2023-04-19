@@ -6,7 +6,7 @@ const loginRoute = require('./routes/login.route.js');
 const signupRoute = require('./routes/signup.route');
 const stripRoute = require('./routes/strip.route.js');
 const gigRoute = require('./routes/gig.route.js');
-
+const buyer = require('./routes/login.route.js')
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -35,3 +35,5 @@ app.use('/', loginRoute);
 app.use('/', stripRoute);
 //gig middleware
 app.use('/', gigRoute);
+
+app.use('/',buyer)

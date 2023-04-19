@@ -31,12 +31,13 @@ const Router = () => {
           <Route path='/gig-detail' element={<GigDetail />} />
           <Route path='/home' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
           <Route path='/create-profile' element={<CreateUpdateProfile />} />
-          <Route path='/buyer' element={<Buyer />} />
+        
         </>
       ) : (
         <>
           <Route index path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/buyer' element={<Buyer />} />
         </>
       )}
       {/* <Route index element={<Signup />} /> */}
