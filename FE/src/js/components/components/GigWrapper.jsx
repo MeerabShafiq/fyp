@@ -5,7 +5,7 @@ import ReadMore from '../core/global/ReadMore';
 import Gigscard from './Gigscard';
 import Payment from './Payment';
 
-const GigWrapper = () => {
+const GigWrapper = (props) => {
   const [open, setOpen] = useState(false);
   const text = ` Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
   industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -65,7 +65,7 @@ const GigWrapper = () => {
         </Col>
         <Col md={8}>
           <Card className='p-2'>
-            <Gigscard />
+            <Gigscard {...props}/>
           </Card>
         </Col>
       </Row>

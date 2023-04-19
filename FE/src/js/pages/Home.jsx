@@ -12,7 +12,7 @@ const Home = (props) => {
         <Col md={10} className='text-center'> Gigs</Col>
         <Col md={2}><Link to='/gig-add'><Button className='d-block ms-auto rounded-3'> Create New</Button></Link></Col>
       </Row>
-      <GigWrapper />
+      <GigWrapper {...props}/>
     </div>
   );
 };

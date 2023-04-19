@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import ReadMore from '../../components/core/global/ReadMore';
 import { fetchrequest } from '../../../function';
 
-const Gigscard = () => {
+const Gigscard = ({buyer}) => {
   const [loading, setLoading]=useState(false)
   const [gigs, setGigs]=useState([])
+  const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   useEffect(() => {
     setLoading(true)
     fetchrequest({
-      endpoint:'gigs'
+      endpoint:buyer?`gigs/${userId}`:'gigs'
     }).then((res) => {
       setGigs(res.data);
       setLoading(false)
