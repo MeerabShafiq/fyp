@@ -11,17 +11,27 @@ const Router = () => {
   const navigate = useNavigate();
   const [buyer, setBuyer] = useState(false);
   const [login, setIslogin] = useState(null);
+
   const token = JSON?.parse(localStorage?.getItem('user-token'))?.token;
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const email = JSON?.parse(localStorage?.getItem('user-token'))?.email;
-  console.log(login);
+  useEffect(() => {
+    if(token)
+    (async()=>  await fetchrequest({ endpoint: 'login', method: 'post', data: { token} }).then((res) => {
+      if (!res.data.success) {
+        localStorage.clear();
+        navigate('/login');
+      }
+    }))()
+  }, [])
+  
   useEffect(() => {
     if (userId) setIslogin({ token, email, userId });
     else {
       navigate('/login');
     }
   }, [userId]);
-  console.log(buyer);
+  
   return (
     <Routes>
       {login ? (
@@ -29,7 +39,7 @@ const Router = () => {
           <Route path='/gig-add' element={<AddUpdategig />} />
           <Route path='/gig-edit:id' element={<AddUpdategig />} />
           <Route path='/gig-detail' element={<GigDetail />} />
-          <Route path='/home' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
+          <Route index path='/home' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
           <Route path='/create-profile' element={<CreateUpdateProfile />} />
         
         </>
@@ -40,9 +50,7 @@ const Router = () => {
           <Route path='/buyer' element={<Buyer />} />
         </>
       )}
-      {/* <Route index element={<Signup />} /> */}
-      {/* <Route path="/login" element={<Login />} /> */}
-      {/* <Route path="/signup" element={<Signup />} /> */}
+      
     </Routes>
   );
 };

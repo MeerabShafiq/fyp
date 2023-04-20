@@ -46,6 +46,8 @@ const Login = () => {
               userId: res.data.userId,
               token: res.data.token,
               email: res.data.email,
+              name: res.data.name,
+
             })
           );
           navigate('/home');
