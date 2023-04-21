@@ -36,3 +36,6 @@
     right: -24px;
     top: -34px;
 }
+.pnav_color .dropdown-toggle::after {
+    display: none !important;
+}

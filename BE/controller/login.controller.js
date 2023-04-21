@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
             const user = (await Register.findOne({ userId: decodedDetails.userId }));
             if (user.password === decodedDetails.password)
               res.status(200).json({
-                decodedDetails,
+                // decodedDetails,
                 userId: decodedDetails.userId,
                 token: decodedDetails.token,
                 email: decodedDetails.email,
@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
               res.status(404).json({ success: false, message: 'token not valid' });
             }
           } else {
-            res.status(404).json({ success: false, message: 'Authentication failed. Token expired'});
+            res.status(200).json({ success: false, message: 'Authentication failed. Token expired'});
           }
           // Do something with the decoded payload
         }

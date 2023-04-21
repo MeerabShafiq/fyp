@@ -9,8 +9,13 @@ import message from '../../../assets/envelop.svg';
 import styles from '../../../scss/components/navbar/navbar.module.scss';
 import RoundImage from '../core/profile/RoundImage';
 import Image from '../svgbtn/SvgButton';
+import { Dropdown } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CNavbar = ({ setBuyer, buyer }) => {
+  const navigate = useNavigate();
+  const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
+
   return (
     <Navbar expand='lg' className={styles.nav_container}>
       <Container fluid>
@@ -52,12 +57,26 @@ const CNavbar = ({ setBuyer, buyer }) => {
                 <div className={styles.profileOnline} />
               </Nav.Link>
             )}
-            <Nav.Link href='#' className={clsx(styles.pnav_color, 'mx-3')}>
-              <div className='position-relative'>
-                <RoundImage />
-                <div className={styles.online} />
-              </div>
-            </Nav.Link>
+
+            <Dropdown>
+              <Dropdown.Toggle variant='transparent' id='dropdown-basic' className={clsx(styles.pnav_color, 'mx-3')}>
+                {/* <Nav.Link href='#' >  */}
+                  <div className='position-relative'>
+                  <RoundImage />
+                    <div className={styles.online} />
+                  </div>
+                {/* </Nav.Link> */}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu style={{left: '-49px'}}>
+                <Dropdown.Item  href='#/action-1'>{name}</Dropdown.Item>
+                <Dropdown.Item as={Link} to='/edit-profile'>Edit Profile</Dropdown.Item>
+                <Dropdown.Item onClick={()=>{
+                  localStorage.clear();
+                  navigate('/login');
+                }}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
