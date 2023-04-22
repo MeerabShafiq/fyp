@@ -23,9 +23,9 @@ const GigWrapper = (props) => {
               <img src='https://dummyimage.com/75x75/000/fff' alt='' className='rounded-circle' />
               <h4 className='ps-4'>Ashir Ali Bhali</h4>
             </div>
-            <Link className='my-3' onClick={() => setOpen(true)}>
+            {/* <Link className='my-3' onClick={() => setOpen(true)}>
               Add bank details
-            </Link>
+            </Link> */}
             <Card className='p-2'>
               <ReadMore text={text} maxLength={350} />
             </Card>
@@ -69,29 +69,30 @@ const GigWrapper = (props) => {
           </Card>
         </Col>
       </Row>
-      {open ? <PaymentModal open={open} setOpen={setOpen} /> : null}
+      {/* {open ? <PaymentModal open={open} setOpen={setOpen} /> : null} */}
     </Container>
   );
 };
 
-const PaymentModal = ({ open, setOpen }) => {
-  const handleClose = () => setOpen(false);
-  console.log('test');
-  return (
-    <Modal show={open} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add bank details</Modal.Title>
-      </Modal.Header>
-      <Modal.Body><Payment/></Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant='primary' onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-};
+// const PaymentModal = ({ open, setOpen }) => {
+//   const handleClose = () => setOpen(false);
+//   console.log('test');
+//   return (
+    
+//     <Modal show={open} onHide={handleClose}>
+//       <Modal.Header closeButton>
+//         <Modal.Title>Add bank details</Modal.Title>
+//       </Modal.Header>
+//       <Modal.Body><Payment/></Modal.Body>
+//       <Modal.Footer>
+//         <Button variant='secondary' onClick={handleClose}>
+//           Close
+//         </Button>
+//         <Button variant='primary' onClick={handleClose}>
+//           Save Changes
+//         </Button>
+//       </Modal.Footer>
+//     </Modal>
+//   );
+// };
 export default GigWrapper;
