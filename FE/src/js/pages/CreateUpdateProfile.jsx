@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import styles from '../../scss/pages/createUpdateProfile.module.scss';
 import clsx from 'clsx';
 const CreateUpdateProfile = () => {
+  const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const colaborationRef = useRef(null);
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
@@ -39,6 +41,7 @@ const CreateUpdateProfile = () => {
   };
   const handleSubmitChange = (event) => {
     event.preventDefault()
+    navigate('/home')
     console.log(profile);
   };
   return (
