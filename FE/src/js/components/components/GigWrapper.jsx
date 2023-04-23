@@ -74,25 +74,20 @@ const GigWrapper = (props) => {
   );
 };
 
-// const PaymentModal = ({ open, setOpen }) => {
-//   const handleClose = () => setOpen(false);
-//   console.log('test');
-//   return (
-    
-//     <Modal show={open} onHide={handleClose}>
-//       <Modal.Header closeButton>
-//         <Modal.Title>Add bank details</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body><Payment/></Modal.Body>
-//       <Modal.Footer>
-//         <Button variant='secondary' onClick={handleClose}>
-//           Close
-//         </Button>
-//         <Button variant='primary' onClick={handleClose}>
-//           Save Changes
-//         </Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// };
+const PaymentModal = ({ open, setOpen }) => {
+  const handleClose = () => setOpen(false);
+  const onSuccess = (result)=>{
+console.log(result);
+    handleClose()
+  }
+  console.log('test');
+  return (
+    <Modal show={open} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add bank details</Modal.Title>
+      </Modal.Header>
+      <Modal.Body><Payment onSuccess={onSuccess}/></Modal.Body>
+    </Modal>
+  );
+};
 export default GigWrapper;

@@ -3,6 +3,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReadMore from '../../components/core/global/ReadMore';
 import { fetchrequest } from '../../../function';
+import gigImage from '../../../assets/best-fiverr-gigs.png'
 
 const Gigscard = ({buyer}) => {
   const [loading, setLoading]=useState(false)
@@ -11,7 +12,7 @@ const Gigscard = ({buyer}) => {
   useEffect(() => {
     setLoading(true)
     fetchrequest({
-      endpoint:buyer?`gigs/${userId}`:'gigs'
+      endpoint:buyer?'gigs':`gigs/${userId}`
     }).then((res) => {
       setGigs(res.data.results||[]);
       setLoading(false)
@@ -24,7 +25,7 @@ const Gigscard = ({buyer}) => {
         {loading?<div className='p-5'>loading...</div>:gigs.map((gig,i) => (
           <Col md={4} key={i} className='p-2'>
             <Card className='p-2'>
-              <img src='https://dummyimage.com/600x600/000/fff' alt='' className='rounded-4' />
+              <img src={gigImage} alt='' className='rounded-4' />
               <div className='d-flex my-3 justify-content-between'>
                 <div> <Link to='/gig-detail'>{gig.title}</Link> </div>
                 <div>RS. {gig.price}</div>

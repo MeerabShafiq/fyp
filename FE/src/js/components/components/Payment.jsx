@@ -13,7 +13,7 @@ import CheckoutForm from "./PaymentForm";
 
 const stripePromise = loadStripe("pk_test_51My2lUGtwtMhoEnmkA0WErIjrSdnx5VKfkKmtmS477aAaLdyLGXnHZln9RfvgEjGKAGwhCshCoOPSC9Y4nKzc1tX004z25VLQG");
 
-export default function Payment() {
+export default function Payment(props) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
@@ -33,13 +33,14 @@ export default function Payment() {
   const options = {
     clientSecret,
     appearance,
+    
   };
 
   return (
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm {...props} clientSecret={clientSecret}/>
         </Elements>
       )}
     </div>

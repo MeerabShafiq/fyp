@@ -48,6 +48,7 @@ const Router = () => {
           <Route path='/gig-detail' element={<GigDetail />} />
           <Route index path='/home' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
           <Route path='/edit-profile' element={<CreateUpdateProfile />} />
+          <Route index path='/login' element={<Login />} />
         </>
       ) : (
         <>
