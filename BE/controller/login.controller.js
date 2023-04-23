@@ -12,13 +12,11 @@ exports.login = async (req, res) => {
       // Verify the token and decode its payload
       jwt.verify(token, secret, async (err, decodedDetails) => {
         if (err) {
-          // Token verification failed
-          console.error('Token verification failed:', err.message);
+          // Token verification faile
           res.status(404).json({ success: false, message: 'Token verification failed:' });
           // Handle the error
         } else {
           // Token verification succeeded
-          console.log('Token verified:', decodedDetails);
           if (decodedDetails.userId) {
             const user = (await Register.findOne({ userId: decodedDetails.userId }));
             if (user.password === decodedDetails.password)

@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
     
         // Create a new Image instance with the file data
         const image = new CreateGig({
+          userId: req.body.userId,
           title: req.body.title,
           price: req.body.price,
           description: req.body.description,

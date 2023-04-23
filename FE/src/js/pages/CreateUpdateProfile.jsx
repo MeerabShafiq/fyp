@@ -145,6 +145,7 @@ if (hasErrors) {
 
     //submt data
     const data = {
+      userId:2,
       instituteName: profile.education.instituteName,
       degreeName: profile.education.degreeName,
       dateFromEd: profile.education.dateFromEd,
@@ -156,7 +157,7 @@ if (hasErrors) {
 
      
     };
-  await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...profile}}).then((res)=>{
+  await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...data}}).then((res)=>{
     if(res.data.success){
       res.status = 200
       navigate('/home')

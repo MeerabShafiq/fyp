@@ -8,6 +8,7 @@ import { fetchrequest } from '../../function';
 const AddUpdategig = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const [gig, setGig] = useState({ title: '', price: 0, description: '' , image:''});
   const goBack = () => navigate(-1);
 
@@ -27,6 +28,7 @@ const AddUpdategig = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    formData.append('userId', userId);
     formData.append('title', gig.title);
     formData.append('price', gig.price);
     formData.append('description', gig.description);
