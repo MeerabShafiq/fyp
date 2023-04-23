@@ -160,8 +160,9 @@ if (hasErrors) {
   await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...data}}).then((res)=>{
     if(res.data.success){
       res.status = 200
-      navigate('/home')
+    
     }
+    navigate('/home')
   })
     
 
