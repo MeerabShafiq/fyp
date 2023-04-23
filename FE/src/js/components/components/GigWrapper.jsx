@@ -42,7 +42,9 @@ const GigWrapper = (props) => {
             {/* <Link className='my-3' onClick={() => setOpen(true)}>
               Add bank details
             </Link> */}
+            <p  style={{fontWeight:'bold',marginTop:'12px',marginLeft:'2px'}}>Description</p>
             <Card className='p-2'>
+            
               <ReadMore text={profile.description} maxLength={350} />
             </Card>
             <div className='py-3'>
