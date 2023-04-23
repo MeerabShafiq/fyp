@@ -8,6 +8,9 @@ const stripRoute = require('./routes/strip.route.js');
 const gigRoute = require('./routes/gig.route.js');
 const buyer = require('./routes/login.route.js')
 const app = express();
+const updateProfile = require('./routes/updateProfile.js')
+
+
 app.use(express.json());
 app.use(cors());
 app.set('view engine', 'ejs');
@@ -37,3 +40,5 @@ app.use('/', stripRoute);
 app.use('/', gigRoute);
 
 app.use('/',buyer)
+
+app.use('/',updateProfile)

@@ -2,7 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import styles from '../../scss/pages/createUpdateProfile.module.scss';
+
+import { fetchrequest } from '../../function';
 import clsx from 'clsx';
+
+
 const CreateUpdateProfile = () => {
   let hasErrors = false;
   const navigate = useNavigate();
@@ -152,7 +156,12 @@ if (hasErrors) {
 
      
     };
-  
+  await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...profile}}).then((res)=>{
+    if(res.data.success){
+      res.status = 200
+      navigate('/home')
+    }
+  })
     
 
 
