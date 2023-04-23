@@ -3,10 +3,15 @@ import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
+import {
+  CardElement
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_51My2lUGtwtMhoEnmkA0WErIjrSdnx5VKfkKmtmS477aAaLdyLGXnHZln9RfvgEjGKAGwhCshCoOPSC9Y4nKzc1tX004z25VLQG");
 
-export default function CheckoutForm() {
+export default function CheckoutForm({onSuccess, clientSecret}) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -46,49 +51,38 @@ export default function CheckoutForm() {
   }, [stripe]);
 
   const handleSubmit = async (e) => {
+    console.log(e);
     e.preventDefault();
-
-    if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return alert('Thank you');
-    }
-
-    setIsLoading(true);
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://127.0.0.1:5174/home",
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        type: 'card',
+        card: elements.getElement(CardElement),
+        billing_details: {
+          email: email,
+        },
       },
     });
-
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+    if (result.error) {
+      console.error(result.error.message);
     } else {
-      setMessage("An unexpected error occurred.");
+      onSuccess(result);
+      // Payment is complete, send receipt email or perform other actions on the server
     }
-
-    setIsLoading(false);
+    // Payment is successful, call onSuccess with the payment intent ID
   };
+  
 
   const paymentElementOptions = {
     layout: "tabs"
   }
-
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <LinkAuthenticationElement
         id="link-authentication-element"
-        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.value.email)}
       />
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <CardElement options={paymentElementOptions} onChange={() => setMessage("got it")} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
