@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
-const Profile = new mongoose.Schema(
+const profile = new mongoose.Schema(
   {
     userId: Number,
     instituteName: String,
     degreeName: String,
-    dateFromEd: Date,
-    dateToEd: Date,
+    dateFromEd: String,
+    dateToEd: String,
     industryName: String,
-    dateFromInd: Date,
-    dateToInd: Date,
+    dateFromInd: String,
+    dateToInd: String,
     description: String,
   },
   {
-    collation: 'UpdateProfile',
+    collation: { locale: 'en_US', strength: 1 },
   }
 );
-const Profiles = mongoose.model('updateProfile', Profile);
-module.exports = Profiles;
+const Profile = mongoose.model('profile', profile);
+module.exports = Profile;

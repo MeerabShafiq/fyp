@@ -10,6 +10,8 @@ const GigWrapper = (props) => {
   const [loading, setLoading]=useState(false)
   const [profile, setPrifile]=useState([])
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
+  const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
+
   const text = ` Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
   industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
   scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
@@ -22,7 +24,8 @@ const GigWrapper = (props) => {
     fetchrequest({
       endpoint:`get-profile/${userId}`
     }).then((res) => {
-      setPrifile(res.data.results||[]);
+      console.log(res);
+      setPrifile(res.data.result||[]);
       setLoading(false)
     })
   }, [])
@@ -34,7 +37,7 @@ const GigWrapper = (props) => {
           <Card className='p-4 '>
             <div className='d-flex align-items-center px-3'>
               <img src='https://dummyimage.com/75x75/000/fff' alt='' className='rounded-circle' />
-              <h4 className='ps-4'>{profile.name}</h4>
+              <h4 className='ps-4'>{name}</h4>
             </div>
             {/* <Link className='my-3' onClick={() => setOpen(true)}>
               Add bank details

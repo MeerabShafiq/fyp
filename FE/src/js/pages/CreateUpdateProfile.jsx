@@ -145,7 +145,7 @@ if (hasErrors) {
 
     //submt data
     const data = {
-      userId:2,
+      userId,
       instituteName: profile.education.instituteName,
       degreeName: profile.education.degreeName,
       dateFromEd: profile.education.dateFromEd,
