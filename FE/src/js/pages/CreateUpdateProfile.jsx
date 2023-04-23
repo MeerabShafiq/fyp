@@ -11,8 +11,8 @@ const CreateUpdateProfile = () => {
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const email = JSON?.parse(localStorage?.getItem('user-token'))?.email;
   const [profile, setProfile] = useState({
-    education: { instituteName: '', degreeName: '', dateFrom: '', dateTo: '' },
-    industry: { industyName: '', dateFrom: '', dateTo: '', institueFile: '' },
+    education: { instituteName: '', degreeName: '', dateFromEd: '', dateToEd: '' },
+    industry: { industryName: '', dateFromInd: '', dateToInd: '', institueFile: '' },
     description: '',
   });
   //Set Ref on click
@@ -41,8 +41,26 @@ const CreateUpdateProfile = () => {
   };
   const handleSubmitChange = (event) => {
     event.preventDefault()
-    navigate('/home')
-    console.log(profile);
+    const data = {
+      instituteName: profile.education.instituteName,
+      degreeName: profile.education.degreeName,
+      dateFromEd: profile.education.dateFromEd,
+      dateToEd: profile.education.dateToEd,
+      industryName: profile.industry.industryName,
+      dateFromInd: profile.industry.dateFromInd,
+      dateToInd: profile.industry.dateToInd,
+      description: profile.description
+
+     
+    };
+  
+    
+
+    // navigate('/home')
+    // console.log(profile.education.dateFrom,profile.education.dateTo)
+
+    // console.log(profile.industry.dateFrom,profile.industry.dateTo);
+    console.log(data)
   };
   return (
     <Container>
@@ -72,18 +90,18 @@ const CreateUpdateProfile = () => {
 
             <Form.Group className='mb-3'>
               <Form.Label>Name of Instritute</Form.Label>
-              <Form.Select aria-label='Default select example' name='instituteName' onChange={handleInstituteChange}>
+              <Form.Select aria-label='Default select example' name='instituteName' value={profile.instituteName} onChange={handleInstituteChange}>
                 <option>Open this select menu</option>
-                <option value='1'>UET</option>
-                <option value='2'>NUST</option>
-                <option value='3'>UMT</option>
+                <option value='UET'>UET</option>
+                <option value='NUST'>NUST</option>
+                <option value='UMT'>UMT</option>
               </Form.Select>
             </Form.Group>
             <Row>
               <Col>
                 <Form.Group className={styles.degreename}>
-                  <Form.Label> </Form.Label>
-                  <Form.Control placeholder='Dgree Name' name='degreeName' onChange={handleInstituteChange} />
+                  <Form.Label>Name of Degree</Form.Label>
+                  <Form.Control placeholder='Dgree Name' name='degreeName' value={profile.degreeName} onChange={handleInstituteChange} />
                 </Form.Group>
               </Col>
               <Col>
@@ -93,19 +111,21 @@ const CreateUpdateProfile = () => {
                     <Form.Control
                       type='date'
                       placeholder='From'
-                      name='fromDate'
+                      name='dateFromEd'
+                      value={profile.education.dateFromEd}
                       className='me-3'
                       onChange={handleInstituteChange}
                     />
-                    <Form.Control type='date' placeholder='to' name='toDate' onChange={handleInstituteChange} />
+                 
+                    <Form.Control type='date' placeholder='to' name='dateToEd' value={profile.education.dateToEd} onChange={handleInstituteChange} />
                   </div>
                 </Form.Group>
               </Col>
             </Row>
             <h2>Industurial Information</h2>
             <Form.Group className='mb-3'>
-              <Form.Label>Name of Instury</Form.Label>
-              <Form.Control placeholder='Industry name' name='industryName' onChange={handleIdustryChange} />
+              <Form.Label>Name of Industury</Form.Label>
+              <Form.Control placeholder='Industry name' name='industryName' value={profile.industryName} onChange={handleIdustryChange} />
             </Form.Group>
             <Form.Group className='mb-3'>
               <Form.Label>Duration</Form.Label>
@@ -113,14 +133,15 @@ const CreateUpdateProfile = () => {
                 <Form.Control
                   type='date'
                   placeholder='From'
-                  name='fromDate'
+                  name='dateFromInd'
                   className='me-3'
+                  value={profile.industry.dateFromInd}
                   onChange={handleIdustryChange}
                 />
-                <Form.Control type='date' placeholder='to' name='toDate' onChange={handleIdustryChange} />
+                <Form.Control type='date' placeholder='to' name='dateToInd' value={profile.industry.dateToInd} onChange={handleIdustryChange} />
               </div>
             </Form.Group>
-            <Form.Group className='d-block mb-4'>
+            {/* <Form.Group className='d-block mb-4'>
               <Form.Label>Certification</Form.Label>
               <Form.Control
                 className='d-none'
@@ -128,6 +149,7 @@ const CreateUpdateProfile = () => {
                 name='institueFile'
                 ref={colaborationRef}
                 type='file'
+                accept=".pdf,.doc,.png,.jpeg"
                 onChange={handleFileColabration}
               />
               <div className={styles.certification}>
@@ -135,13 +157,14 @@ const CreateUpdateProfile = () => {
                   +
                 </Button>
               </div>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className='mb-3 d-flex'>
               <Form.Control
                 as='textarea'
-                placeholder='Description'
+                placeholder='description'
                 style={{ height: '100px' }}
                 name='description'
+                value={profile.description}
                 onChange={({ target }) => setProfile({ ...profile, description: target.value })}
               />
             </Form.Group>
