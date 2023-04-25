@@ -9,7 +9,7 @@ const gigRoute = require('./routes/gig.route.js');
 const buyer = require('./routes/login.route.js')
 const app = express();
 const updateProfile = require('./routes/updateProfile.js')
-
+const Payment = require('./routes/payment.route.js')
 
 app.use(express.json());
 app.use(cors());
@@ -42,3 +42,5 @@ app.use('/', gigRoute);
 app.use('/',buyer)
 
 app.use('/',updateProfile)
+
+app.use('/',Payment)
