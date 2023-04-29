@@ -1,65 +1,112 @@
-const stripe = require('stripe')('sk_test_51My2lUGtwtMhoEnmfcTfmrr8whC3sU6G07lscUl0a6g9fTDZX0ClMzZD6d4wGzSS4g4bPulIPyJZhKcO56x0XWJ00N4bVIpiN');
-const nodemailer = require('nodemailer');
-exports.handleWebhook = async (req, res) => {
-  console.log('akskdaskjdsdsa====================>');
-  const sig = req.headers['stripe-signature'];
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const axios = require('axios');
+const request = require('request');
+const Jazzcash = require('jazzcash-checkout');
+app.use(cors());
 
-  let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-  } catch (err) {
-    console.error(err);
-    return res.sendStatus(400);
-  }
 
-  if (event.type === 'payment_intent.succeeded') {
-    const paymentIntent = event.data.object;
+exports.PaymentCheck = async(req,res)=>{
+  
+  
+  
+  
+  // const XIBMClientId ='f8d8c338-ee8e-4fe5-84f9-ad1090e2b005'
+  //     const XIBMClientSecret ='nH5sD1oR5dX6cC3vV1kY1xS1oB1eP3sM7hB5lR3xX5yV8oK7lG'
 
-    // Send receipt email
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'rockbutt0@gmail.com',
-        pass: '080907',
+
+   Jazzcash.credentials({
+      config:{
+        merchantId:"MC56160",
+        password:"u25y384sh5",
+        hashKey:"s4tbdttvc1",
       },
-    });
-
-    const mailOptions = {
-      from: 'rockbutt0@gmail.com',
-      to: paymentIntent.receipt_email,
-      subject: `Payment receipt for order #${paymentIntent.id}`,
-      text: `Thank you for your purchase! Your payment of $${(paymentIntent.amount / 100).toFixed(
-        2
-      )} has been received. Please keep this email as your receipt.`,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
-  }
-
-  res.sendStatus(200);
-};
-exports.createPaymentIntent = async (req, res) => {
-  const { amount, email } = req.body;
-
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: 'usd',
-      receipt_email: email,
-    });
-
-    res.json({ clientSecret: paymentIntent.client_secret });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Unable to create payment intent' });
-  }
-};
+          environment:'sandbox',
 
 
+   });
+      
+   Jazzcash.setData({
+    // pp_Amount: 100,
+    // pp_TxnType: "MWALLET",
+    // pp_Language: "EN",
+    // pp_MerchantID: "MC56193",
+    // pp_Password: "404sy0txt4",
+    // pp_TxnRefNo: "T20230427091445",
+    // pp_TxnCurrency: "PKR",
+    // pp_TxnDateTime: "20230427085558",
+    // pp_BillReference: "billref",
+    // pp_MobileNumber: '03338708916',
+    // pp_Description: "Description of transaction",
+    // pp_TxnExpiryDateTime: "20230427085558",
+    // pp_ReturnURL: "https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction",
+    // pp_SecureHash: "",
+    // pp_BillReference: "billRef123",
+    // pp_Description: "Test Payment",
+    // pp_Version: "1.1",
+    // pp_CNIC: "3460383305361",
+
+    pp_Amount: 1 * 100,
+    pp_TxnType: "MWALLET",
+    pp_Version: "1.0",
+    pp_BillReference: "billRef123",
+    pp_Description: "Test Payment",
+    pp_MobileNumber: "03338708916",
+    pp_CNIC: "346038",
+    pp_TxnExpiryDateTime: "20230427085558",
+   
+   })
+
+    // console.log(Jazzcash.data)
+      Jazzcash.createRequest("PAY").then((res)=>{
+             res = JSON.parse(res)
+          console.log(res)
+      });
+    //   axios.post('https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction',data,{requestOptions})
+    //  .then((response)=>{
+    //   console.log(response)
+    //  })
+    //     .catch(error=>{
+    //       console.log(error)
+    //     })
+      
+      
+      
+}
+// if((response)=>{
+//   const token = response.data.access_token;
+//   console.log(token)
+// })
+
+ // const client = new easypaisa({
+      //    'ClientId' : 'f8d8c338-ee8e-4fe5-84f9-ad1090e2b005',
+      //   'ClientSecret':'nH5sD1oR5dX6cC3vV1kY1xS1oB1eP3sM7hB5lR3xX5yV8oK7lG',
+      //   'X-Channel':'WEB',
+      //   'content-type': 'application/json',
+      //    accept: 'application/json',
+      //    environment:"sandbox",
+      //    'Autorization':`Basic ${Buffer.from(`${ClientId}:${ClientSecret}`).toString('base64')}`
+      //   })
+
+    
+      // const data=({
+      //   amount: '10.00',
+      //   sender_mobileNumber: '+923338708916',
+      //   receiver_mobileNUmber:"+923352777765",
+      //   transactionRef: '1234567890',
+      //   expiryInMinutes: '30',
+      //   transferDescription: 'Payment for services',
+        
+       
+      // })
+      
+     
+      
+      // axios.post('https://api.eu-de.apiconnect.appdomain.cloud/easypaisaapigw-telenorbankpk-tmbdev/dev-catalog/CashDeposit/CashDeposit', data, client )
+      //   .then(response => {
+      //        const token = response.data.access_token;
+   
+      //     // console.log(token);
+      //   })

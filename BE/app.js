@@ -10,9 +10,7 @@ const buyer = require('./routes/login.route.js')
 const app = express();
 const stripe = require('stripe')('sk_test_51My2lUGtwtMhoEnmfcTfmrr8whC3sU6G07lscUl0a6g9fTDZX0ClMzZD6d4wGzSS4g4bPulIPyJZhKcO56x0XWJ00N4bVIpiN');
 const updateProfile = require('./routes/updateProfile.js')
-const payment = require('./routes/payment.route.js')
-const paymentController = require('./controller/payment.controller')
-
+const Payment = require('./routes/payment.route.js')
 
 app.use(express.json());
 app.use(cors());
@@ -45,6 +43,5 @@ app.use('/', gigRoute);
 app.use('/',buyer)
 
 app.use('/',updateProfile)
-// Create a payment intent
-app.post("/",payment)
-app.post("/webhook", express.raw({ type: "application/json" }), paymentController.handleWebhook);
+
+app.use('/',Payment)

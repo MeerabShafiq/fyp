@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const paymentController = require('../controller/payment.controller')
+const paymentcontroller = require('../controller/payment.controller')
 
+router.post('/payment',paymentcontroller.PaymentCheck)
 
-
-
-router.post("/create-payment-intent", paymentController.createPaymentIntent)
-
-module.exports = router;
+module.exports = router
