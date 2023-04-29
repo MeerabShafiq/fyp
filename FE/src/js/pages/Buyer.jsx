@@ -40,7 +40,7 @@ const Buyer = () => {
     if (loginform.email && loginform.password && isValid) {
       await fetchrequest({ endpoint: 'login', method: 'post', data: { ...loginform } }).then((res) => {
         
-        if (res.data.success) navigate('/home');
+        if (res.data.success) navigate('/');
         else{
           console.log(loginform.email)
         }

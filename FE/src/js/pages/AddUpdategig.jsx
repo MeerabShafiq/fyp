@@ -38,7 +38,7 @@ const AddUpdategig = () => {
     isSubmit&& await fetchrequest({
       method:'post', endpoint:'create-gig', data:formData 
     }).then((res) => {
-      navigate('/home') 
+      navigate('/') 
       console.log(res);
     });
 

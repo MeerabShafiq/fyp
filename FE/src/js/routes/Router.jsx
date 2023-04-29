@@ -46,7 +46,7 @@ const Router = () => {
           <Route path='/gig-add' element={<AddUpdategig />} />
           <Route path='/gig-edit:id' element={<AddUpdategig />} />
           <Route path='/gig-detail' element={<GigDetail />} />
-          <Route index path='/home' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
+          <Route index path='/' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
           <Route path='/edit-profile' element={<CreateUpdateProfile />} />
           <Route index path='/login' element={<Login />} />
         </>

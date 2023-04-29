@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import Payment from '../components/components/Payment';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -46,6 +47,7 @@ const goBack = ()=>navigate(-1)
        
       </Card>
       {open ? <PaymentModal open={open} setOpen={setOpen} /> : null}
+      <ToastContainer/>
     </Container>
   );
 };
@@ -58,15 +60,7 @@ const PaymentModal =({open , setOpen})=>{
       <Modal.Header closeButton>
         <Modal.Title>Add bank details</Modal.Title>
       </Modal.Header>
-      <Modal.Body><Payment/></Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant='primary' onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+      <Modal.Body><Payment handleClose={handleClose} toast={toast}/></Modal.Body>
     </Modal>
   );
 }

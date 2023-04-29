@@ -1,0 +1,13 @@
+.Toastify__toast {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .Toastify__toast-body {
+    font-size: 14px;
+  }
+  
+  .Toastify__progress-bar {
+    background-color: #333;
+  }

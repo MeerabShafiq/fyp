@@ -162,7 +162,7 @@ if (hasErrors) {
       res.status = 200
     
     }
-    navigate('/home')
+    navigate('/')
   })
     
 
