@@ -60,9 +60,10 @@ exports.PaymentCheck = async(req,res)=>{
    })
 
     // console.log(Jazzcash.data)
-      Jazzcash.createRequest("PAY").then((res)=>{
-             res = JSON.parse(res)
-          console.log(res)
+      Jazzcash.createRequest("PAY").then((response)=>{
+
+          console.log(response)
+          res.json(response)
       });
     //   axios.post('https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction',data,{requestOptions})
     //  .then((response)=>{
