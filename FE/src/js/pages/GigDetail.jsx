@@ -27,17 +27,17 @@ const goBack = ()=>navigate(-1)
       <Card style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)' }} className= {clsx(styles.card)}>
       <Card.Body>
         <Card.Title className={styles.gigInfo}>Gig Information:</Card.Title>
-        <Link className='my-3'   onClick={()=>setOpen(true)}>
+        {/* <Link className='my-3'   onClick={()=>setOpen(true)}>
         
           <div style={{paddingLeft:"1000px"}}>
             Buy Now
           </div>
           
          
-        </Link>
-        <Link onClick={()=>doIt(('https://buy.stripe.com/7sI6pJbISbA9eR2aEE'))}><div style={{paddingLeft:"1000px"}}>
-            Buy
-          </div></Link>
+        </Link> */}
+      <p style={{paddingLeft:"1000px"}}>
+        <Link to="https://buy.stripe.com/4gw9BV7sCaw5cIU7sv">BUY</Link>
+      </p>
         <div>
           <h3 className={styles.cardTitle}>Title of the gig here</h3>
           <Card.Text className={styles.cardText}>

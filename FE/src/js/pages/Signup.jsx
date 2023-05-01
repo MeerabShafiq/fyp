@@ -36,9 +36,7 @@ const Signup = () => {
   };
   //facebook button
 
-  const fb_login = () => {
-    window.location.href = 'https://www.facebook.com';
-  };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,6 +90,8 @@ const Signup = () => {
       };
 
       fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
+        
+
         if ((response.status = 200)) {
           navigate('/login');
         } else {
