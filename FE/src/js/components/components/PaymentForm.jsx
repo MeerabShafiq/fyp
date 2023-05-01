@@ -12,7 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Button, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 
-const stripePromise = loadStripe("pk_test_51My2lUGtwtMhoEnmkA0WErIjrSdnx5VKfkKmtmS477aAaLdyLGXnHZln9RfvgEjGKAGwhCshCoOPSC9Y4nKzc1tX004z25VLQG");
+const stripePromise = loadStripe("pk_live_51MnB2oFL6hFNWjDzT07Nms3QGTsHkfN0DwzbgoEBaX0bUxjLbYsjSAckRz3w2R213hd0brqopQLrzMeWsA8HETe800GmR2CZzz");
 
 export default function CheckoutForm({onSuccess, clientSecret, handleClose, }) {
   const stripe = useStripe();
