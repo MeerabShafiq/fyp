@@ -102,11 +102,9 @@ const Login = () => {
             Submit
           </button>
         </div>
-        <p className='forgot-password text-right'>
-          Switch to Buyer<Link to='/buyer'> HERE</Link>
-        </p>
-        <p className={styles.signup}>
-          New User? <Link to='/signup'>Sign up </Link>
+        
+        <p className={'forgot-password text-right'}>
+          ALready User? <Link to='/signup'>Sign up </Link>
         </p>
       </form>
     </Container>
