@@ -38,8 +38,10 @@ const Login = () => {
     }
 
     if (loginform.email && loginform.password && isValid) {
+      try {
       await fetchrequest({ endpoint: 'login', method: 'post', data: { ...loginform } }).then((res) => {
-        if (res.data.success) {
+        console.log(res);
+        if (res?.data?.success) {
           localStorage.setItem(
             'user-token',
             JSON.stringify({
@@ -53,7 +55,15 @@ const Login = () => {
           navigate('/');
         }
       });
+    } catch (error) {
+      if(error.response.data.message==='Authentication failed. Wrong password.'){
+        setPasswordError('Password is incorect');
+      }
+      else if(error.response.data.message==='Authentication failed. Email not found.'){
+        setEmailError('Email is incorect');
+      }
     }
+  }
   };
 
   return (

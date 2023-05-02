@@ -17,19 +17,21 @@ const Router = () => {
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const email = JSON?.parse(localStorage?.getItem('user-token'))?.email;
   useEffect(() => {
-    if (token) {
-      const checkLogin = async () => {
-        await fetchrequest({ endpoint: 'login', method: 'post', data: { token } }).then((res) => {
-          if (!res.data.success) {
-            localStorage.clear();
-            navigate('/login');
-          }
-        });
-      };
-      checkLogin();
-    } else {
-      navigate('/login');
-    }
+    const checkLogin = async () => {
+      try {
+        if (token) {
+          await fetchrequest({ endpoint: 'login', method: 'post', data: { token } }).then((res) => {
+            if (!res?.data?.success) {
+              localStorage.clear();
+              navigate('/login');
+            }
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkLogin();
   }, []);
 
   useEffect(() => {
