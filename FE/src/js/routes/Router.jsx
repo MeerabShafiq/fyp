@@ -28,7 +28,12 @@ const Router = () => {
           });
         }
       } catch (error) {
-        console.log(error);
+        if (error.response.data.message === 'Token verification failed:') {
+          localStorage.clear();
+          navigate('/login');
+        } else {
+          console.log(error);
+        }
       }
     };
     checkLogin();

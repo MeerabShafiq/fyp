@@ -89,15 +89,18 @@ const Signup = () => {
         confirmPassword: loginform.confirmPassword,
       };
 
-      fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
+      try{
+        fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
         
 
-        if ((response.status = 200)) {
-          navigate('/login');
-        } else {
-          console.log('not signup');
-        }
-      });
+          if ((response.status = 200)) {
+            navigate('/login');
+          } 
+        });
+      }
+      catch(err){
+        console.log('not signup');
+      }
     }
   };
   // Set hasErrors based on whether there are any errors

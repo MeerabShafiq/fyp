@@ -15,23 +15,27 @@ exports.signup = async (req, res) => {
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
   });
-  await Register.find({ email, firstName, lastName })
-    .then((result) => {
-      if (result.length) {
-        if (result == Register.firstName || result == Register.lastName || result == Register.email) {
-          res.send({ data: 'user alerady exits' });
-        } else {
-          res.json({ message: 'alreaday there' });
-        }
+  await Register.findOne({ email })
+  .then((result) => {
+    console.log(result, register);
+    if (result) {
+      if (result.firstName == register.firstName || result.lastName == register.lastName || result.email == register.email) {
+        res.status(409).json({ data: 'Email already exists' });
       } else {
-        register.save().then((result) => {
-          if (result) {
-            res.json({ message: 'success' });
-          }
-        });
+        res.status(409).json({ message: 'already there' });
       }
-    })
-    .catch((err) => {
-      res.send({ data: 'failed' });
-    });
+    } else {
+      register.save().then((result) => {
+        if (result) {
+          res.status(200).json({ message: 'success' });
+        } else {
+          res.status(404).json({ message: 'Try again' });
+        }
+      });
+    }
+  })
+  .catch((err) => {
+    res.send({ data: 'failed' });
+  });
+
 };
