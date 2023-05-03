@@ -6,8 +6,8 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import AddUpdategig from '../pages/AddUpdategig';
 import CreateUpdateProfile from '../pages/CreateUpdateProfile';
-import Buyer from '../pages/Buyer';
 import { fetchrequest } from '../../function';
+
 const Router = () => {
   const navigate = useNavigate();
   const [buyer, setBuyer] = useState(false);
@@ -61,7 +61,6 @@ const Router = () => {
         <>
           <Route index path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/buyer' element={<Buyer />} />
         </>
       )}
     </Routes>

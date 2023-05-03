@@ -6,6 +6,7 @@ import styles from '../../scss/pages/login.module.scss';
 import style from '../../scss/pages/signin.module.scss';
 //function
 import { fetchrequest } from '../../function';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -89,18 +90,33 @@ const Signup = () => {
         confirmPassword: loginform.confirmPassword,
       };
 
-      try{
+      try {
         fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
-        
-
-          if ((response.status = 200)) {
+          console.log('response received:', response);
+          console.log('response status:', response.status);
+          if (response.status === 200) {
+            toast('Created Successfully')
             navigate('/login');
           } 
+          else if(response.status === 409){
+            setErrors((p) => ({ ...p, email: 'Email exist already' }));
+          }
+          else if(response.status === 404){
+            toast('Try again')
+          }
+        }).catch((error) => {
+          if(error.response.status === 409){
+            setErrors((p) => ({ ...p, email: 'Email exist already' }));
+          }
+          else if(error.response.status === 404){
+            toast('Try again')
+          }
+          console.log('error occurred:', error);
         });
-      }
-      catch(err){
+      } catch(err){
         console.log('not signup');
       }
+      
     }
   };
   // Set hasErrors based on whether there are any errors
