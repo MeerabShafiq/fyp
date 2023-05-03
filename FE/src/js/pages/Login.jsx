@@ -56,10 +56,10 @@ const Login = () => {
         }
       });
     } catch (error) {
-      if(error.response.data.message==='Authentication failed. Wrong password.'){
+      if(error.response?.data.message==='Authentication failed. Wrong password.'){
         setPasswordError('Password is incorect');
       }
-      else if(error.response.data.message==='Authentication failed. Email not found.'){
+      else if(error.response?.data.message==='Authentication failed. Email not found.'){
         setEmailError('Email is incorect');
       }
     }

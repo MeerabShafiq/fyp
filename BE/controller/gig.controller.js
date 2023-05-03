@@ -25,38 +25,43 @@ conn.once('open', () => {
 conn.on('error', console.error.bind(console, 'connection error:'));
 
 
+const cloudinary = require('cloudinary').v2;
+
+// Configuration 
+cloudinary.config({
+  cloud_name: "dmaqbrci3",
+  api_key: "892285218522175",
+  api_secret: "dEA5TjoVS2s62QV3XXSoH1gkArA"
+});
+
 exports.create = async (req, res) => {
-    upload.single('image')(req, res, function (err) {
-        if (err) {
-          // Handle the error if the file upload fails
-          console.error(err);
-          return res.status(400).send('Error uploading file');
-        }
+  const file = req.image;
+  console.log(req);
+  try {
+    // Upload the image to Cloudinary
+    const result = await cloudinary.uploader.upload(file);
     
-        // Create a new Image instance with the file data
-        const image = new CreateGig({
-          userId: req.body.userId,
-          title: req.body.title,
-          price: req.body.price,
-          description: req.body.description,
-          name: req.file.originalname,
-          data: req.file.buffer,
-          contentType: req.file.mimetype,
-        });
-    
-        // Save the image to MongoDB
-        image.save(function (err) {
-          if (err) {
-            // Handle the error if the image save fails
-            console.error(err);
-            return res.status(400).send('Error saving image to database');
-          }
-    
-          // Return a success response
-          res.status(200).send('Image saved successfully');
-        });
-      });
+    // Create a new Gig instance with the Cloudinary image URL
+    const gig = new CreateGig({
+      userId: req.body.userId,
+      title: req.body.title,
+      price: req.body.price,
+      description: req.body.description,
+      imageUrl: result.secure_url
+    });
+
+    // Save the gig to MongoDB
+    await gig.save();
+
+    // Return a success response
+    res.status(200).send('Gig saved successfully');
+  } catch (err) {
+    // Handle any errors that occur during the upload or save process
+    console.error(err);
+    res.status(400).send('Error uploading image or saving gig to database');
+  }
 };
+
 exports.get = async (req, res) => {
   const userId = req.params.id||'';
   try {

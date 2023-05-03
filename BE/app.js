@@ -10,6 +10,7 @@ const buyer = require('./routes/login.route.js')
 const app = express();
 const updateProfile = require('./routes/updateProfile.js')
 const Payment = require('./routes/payment.route.js')
+const cloudinary = require('cloudinary').v2;
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,12 @@ db.on("error", console.error.bind(console, 'connection error: '))
 db.once("open", () => {
   console.log('Connected Successfully')
 })
+// Configuration 
+cloudinary.config({
+  cloud_name: "dmaqbrci3",
+  api_key: "892285218522175",
+  api_secret: "dEA5TjoVS2s62QV3XXSoH1gkArA"
+});
 
 //signup middleware
 app.use('/', signupRoute);
