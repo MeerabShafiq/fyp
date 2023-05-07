@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import styles from '../../scss/pages/createUpdateProfile.module.scss';
-
+// import nodemailer from 'nodemailer'
 import { fetchrequest } from '../../function';
 import clsx from 'clsx';
 
@@ -27,7 +27,33 @@ const CreateUpdateProfile = () => {
   const handleCertificateClick = () => {
     colaborationRef.current.click();
   };
+   
+  // const sendMail=()=>{
+  //       const transpoter = nodemailer.createTransport({
+  //         service: 'gmail',
+  //         auth:{
+  //           user: 'root2hack@gmail.com',
+  //           pass:'T@umthkho786'
+  //         }
+  //       })
 
+  //       const mailOptions ={
+  //         from:'root2hack@gmail.com',
+  //         to:'buttw935@gmail.com',
+  //         subject:'test',
+  //         text:'hello there'
+  //       };
+
+  //       transpoter.sendMail(mailOptions,(error, info)=>{
+  //         if(error)
+  //         {
+  //           console.log(error)
+  //         }
+  //         else{
+  //           console.log('sent: '+' '+info.response)
+  //         }
+  //       })
+  // }
   
   //upload file
   const handleFileChange = (event) => {
@@ -281,6 +307,7 @@ useEffect(() => {
             {errors.description && <span className='text-danger' style={{paddingTop:"-2px"}}>{errors.description}</span>}
             <div style={{paddingTop:"10px"}}>
             <Button onClick={handleSubmitChange}>Save</Button>
+            <Button onClick={handleSubmitChange}>send</Button>
             </div>
           </div>
         </div>
