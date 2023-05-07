@@ -27,6 +27,8 @@ const CreateUpdateProfile = () => {
   const handleCertificateClick = () => {
     colaborationRef.current.click();
   };
+
+  
   //upload file
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
