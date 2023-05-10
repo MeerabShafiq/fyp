@@ -1,21 +1,14 @@
-const express = require('express');
-const cors = require('cors');
 const nodemailer = require('nodemailer');
-const { error } = require('console');
 
 exports.sendEMail = async(req,res)=>{
   const {to , subject , text, Time}= req.body;
-  // console.log(recipient, subject , message)
     let transporter = nodemailer.createTransport({
        service:'gmail',
-              // true for 465, false for other ports
         auth: {
           user: 'root2hack@gmail.com', // generated ethereal user
           pass: 'vpvroksxjuvnlalb', // generated ethereal password
         },
       });
-      // console.log(to,subject,text, Time)
-      // send mail with defined transport object
        await transporter.sendMail({
         from: 'root2hack@gmail.com', // sender address
         to: to, // list of receivers
@@ -23,11 +16,10 @@ exports.sendEMail = async(req,res)=>{
         text: text, // plain text body
         Time:Time,
         
-      }).then((res)=>{
-        console.log(res)
-        return res.status(200).json({message:"success"})
+      }).then((response)=>{
+       res.status(200).json({message:response})
       }).catch((err)=>{
-        return res.status(404).json({message:err})
+        return res.status(404).json({message:{err}})
       })
       
         

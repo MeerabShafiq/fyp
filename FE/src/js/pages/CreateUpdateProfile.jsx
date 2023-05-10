@@ -5,12 +5,14 @@ import styles from '../../scss/pages/createUpdateProfile.module.scss';
 // import {nodemailer} from 'nodemailer';
 import { fetchrequest } from '../../function';
 import clsx from 'clsx';
+import axios from 'axios';
 
 
 const CreateUpdateProfile = () => {
   let hasErrors = false;
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const inputRef = useRef()
   const colaborationRef = useRef(null);
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
@@ -36,7 +38,12 @@ const CreateUpdateProfile = () => {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setProfile({ ...profile, industry: { ...profile.industry, institueFile: event.target.files[0] } });
-    console.log('Selected file:', selectedFile);
+    const formData = new FormData();
+    formData.append('file',event.target.files[0])
+    formData.append('upload_preset', 'dmaqbrci3')
+  console.log();
+  console.log('Selected file:', selectedFile);
+  axios.post('https://api.cloudinary.com/v1_1/dmaqbrci3/image/upload', formData).then((res)=> console.log(res.data['secure_url']))
   };
   const handleFileColabration = (event) => {
     const selectedFile = event.target.files[0];
@@ -162,13 +169,13 @@ if (hasErrors) {
 
      
     };
-  await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...data}}).then((res)=>{
-    if(res.data.success){
-      res.status = 200
+  // await fetchrequest ({endpoint:'edit-profile' , method: 'post', data:{...data}}).then((res)=>{
+  //   if(res.data.success){
+  //     res.status = 200
     
-    }
-    navigate('/')
-  })
+  //   }
+  //   navigate('/')
+  // })
     
 
 
@@ -186,14 +193,15 @@ useEffect(() => {
           <div className='d-flex mt-5 mb-5'>
             <Form.Group className='mb-3 '>
               <Form.Control
+                ref={fileInputRef}
                 type='file'
                 id='upload-image'
                 label='Upload an image'
                 onChange={handleFileChange}
                 className='d-none'
               />
-              <div htmlFor='upload-image' onClick={handleButtonClick}>
-                <img src='https://dummyimage.com/80x80/000/fff' alt='' className='rounded-circle' />
+              <div htmlFor='upload-image' onClick={handleButtonClick} >
+                <img src={profile.institueFile?URL.createObjectURL(profile.institueFile):'https://dummyimage.com/80x80/000/fff'} alt='' className='rounded-circle' />
               </div>
             </Form.Group>
             <div className='ms-4'>
