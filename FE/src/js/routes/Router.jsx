@@ -4,6 +4,7 @@ import GigDetail from '../pages/GigDetail';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import Emailp from '../pages/email';
 import AddUpdategig from '../pages/AddUpdategig';
 import CreateUpdateProfile from '../pages/CreateUpdateProfile';
 import { fetchrequest } from '../../function';
@@ -56,11 +57,13 @@ const Router = () => {
           <Route index path='/' element={<Home setBuyer={setBuyer} buyer={buyer} />} />
           <Route path='/edit-profile' element={<CreateUpdateProfile />} />
           <Route index path='/login' element={<Login />} />
+          <Route path='/email' element={<Emailp />}/>                   
         </>
       ) : (
         <>
           <Route index path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+           
         </>
       )}
     </Routes>

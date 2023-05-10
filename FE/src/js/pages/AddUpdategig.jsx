@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import styles from '../../scss/pages/addUpdate.module.scss';
+import style from '../../scss/pages/login.module.scss'
 import { fetchrequest } from '../../function';
 
 const AddUpdategig = () => {
@@ -45,9 +46,10 @@ const AddUpdategig = () => {
     
   };
   return (
+    <div  className={style.h}>
     <Container className='px-5'>
-      <h2 className={clsx(styles.cardTitle, 'py-5')} onClick={goBack}>
-        <span className='border'>{`<`}</span>Create New Gig
+      <h2 className={clsx(styles.cardTitle, 'py-5')} style={{ fontWeight: 'bold' , color: '#000000' }} onClick={goBack}>
+        <span   className='border'>{`<`}</span>Create New Gig
       </h2>
       <Card style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)' }} className={clsx(styles.card)}>
         <Card.Body>
@@ -55,7 +57,7 @@ const AddUpdategig = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className='mb-3 d-flex'>
               <Form.Control className='me-3' required type='text' placeholder='Title' name='title' onChange={handleChange} />
-              <Form.Control required type='number' placeholder='Price' name='price' onChange={handleChange} />
+              <Form.Control required type='number' min={1} placeholder='Price' name='price' onChange={handleChange} />
             </Form.Group>
             <Form.Group className='mb-3 d-flex'>
               <Form.Control
@@ -86,6 +88,7 @@ const AddUpdategig = () => {
         </Card.Body>
       </Card>
     </Container>
+    </div>
   );
 };
 

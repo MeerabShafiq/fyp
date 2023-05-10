@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import styles from '../../scss/pages/createUpdateProfile.module.scss';
-import nodemailer from 'nodemailer'
+// import {nodemailer} from 'nodemailer';
 import { fetchrequest } from '../../function';
 import clsx from 'clsx';
 
@@ -29,28 +29,7 @@ const CreateUpdateProfile = () => {
   };
    
   const sendMail= async()=>{
-        const transpoter = nodemailer.createTransport({
-          host: "smtp.ethereal.email",
-          port: 587,
-          secure: false,
-          auth:{
-            user: 'root2hack@gmail.com',
-            pass:'oneqhtpplovnusog'
-          }
-        })
-
-      
-
-        let info = await transpoter.sendMail({
-          from:'root2hack@gmail.com',
-          to:'buttw935@gmail.com',
-          subject:'heelo',
-          text:'hi',
-          html:'<b>hello nasa</b>',
-        })
-
-        console.log("sent",info.messageId)
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+       
   }
   
   //upload file
@@ -201,7 +180,6 @@ useEffect(() => {
 }, [errors]);
   return (
     <Container >
-        <Button onClick={sendMail}>send</Button>
       <h2 className={styles.header}>Edit Profile: </h2>
       <Form>
         <div className={styles.container}>

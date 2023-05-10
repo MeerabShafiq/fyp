@@ -1,5 +1,13 @@
+.h{
+    background-image: url('../../images/g.jpg');
+    // background-repeat: no-repeat;
+    height: 979px;
+    width: 1920px;
+}
 .container{
+    
     height: 100vh;
+   
     display: flex;
 }
 .formContainer{
@@ -18,5 +26,5 @@
     border-radius: 6px;
     border: 1px solid rgba(128, 128, 128, 0.302);
     box-shadow: 3px;
-    color: rgba(255, 0, 0, 0.442);
+    color: rgb(255, 0, 0);
 }

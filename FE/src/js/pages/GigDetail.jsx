@@ -2,6 +2,7 @@ import {React} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { Card, Container, Form , Modal,Button} from 'react-bootstrap';
 import styles from '../../scss/pages/gigdetail.module.scss'
+import style from '../../scss/pages/login.module.scss'
 import clsx from 'clsx';
 import Payment from '../components/components/Payment';
 import { Link } from 'react-router-dom';
@@ -22,8 +23,9 @@ const GigDetail = () => {
     software like Aldus PageMaker including versions of Lorem Ipsum.`;
 const goBack = ()=>navigate(-1)
   return (
+    <div  className={style.h}>
     <Container className='px-5'>
-      <h2 className={clsx(styles.cardTitle,'py-5')} onClick={goBack}> <span className='border'>{`<`}</span> Gig details</h2>
+      <h2 style={{ fontWeight: 'bold' , color: '#000000'}} className={clsx(styles.cardTitle,'py-5')} onClick={goBack}> <span className='border'>{`<`}</span> Gig details</h2>
       <Card style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)' }} className= {clsx(styles.card)}>
       <Card.Body>
         <Card.Title className={styles.gigInfo}>Gig Information:</Card.Title>
@@ -36,7 +38,7 @@ const goBack = ()=>navigate(-1)
          
         </Link> */}
       <p style={{paddingLeft:"1000px"}}>
-        <Link to="https://buy.stripe.com/4gw9BV7sCaw5cIU7sv">BUY</Link>
+        <Link to="/email">Create offer</Link>
       </p>
         <div>
           <h3 className={styles.cardTitle}>Title of the gig here</h3>
@@ -55,6 +57,7 @@ const goBack = ()=>navigate(-1)
       {open ? <PaymentModal open={open} setOpen={setOpen} /> : null}
       <ToastContainer/>
     </Container>
+</div>
   );
 };
 

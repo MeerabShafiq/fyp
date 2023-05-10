@@ -7,6 +7,7 @@ const signupRoute = require('./routes/signup.route');
 const stripRoute = require('./routes/strip.route.js');
 const gigRoute = require('./routes/gig.route.js');
 const buyer = require('./routes/login.route.js')
+const emailroute = require('./routes/email.route.js')
 const app = express();
 const updateProfile = require('./routes/updateProfile.js')
 const Payment = require('./routes/payment.route.js')
@@ -51,3 +52,4 @@ app.use('/',buyer)
 app.use('/',updateProfile)
 
 app.use('/',Payment)
+app.use('/',emailroute)

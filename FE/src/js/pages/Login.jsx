@@ -67,12 +67,13 @@ const Login = () => {
   };
 
   return (
+    <div  className={styles.h}>
     <Container className={styles.container}>
       <form className={styles.formContainer}>
-        <h3>Sign In</h3>
+        <h3 style={{ fontWeight: 'bold' }}>Sign In</h3>
 
         <div className='mb-3'>
-          <label>Email address</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>Email address</label>
           <input
             type='email'
             className='form-control'
@@ -86,7 +87,7 @@ const Login = () => {
         </div>
 
         <div className='mb-3'>
-          <label>Password</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>Password</label>
           <input
             type='password'
             className='form-control'
@@ -101,7 +102,7 @@ const Login = () => {
         <div className='mb-3'>
           <div className='custom-control custom-checkbox'>
             <input type='checkbox' className='custom-control-input' id='customCheck1' />
-            <label className='custom-control-label' htmlFor='customCheck1'>
+            <label className='custom-control-label' htmlFor='customCheck1' style={{ fontWeight: 'bold' , color: '#000000' }}>
               Remember me
             </label>
           </div>
@@ -113,11 +114,12 @@ const Login = () => {
           </button>
         </div>
         
-        <p className={'forgot-password text-right'}>
+        <p className={'forgot-password text-right'} style={{ fontWeight: 'bold' , color: '#000000' }}>
           ALready User? <Link to='/signup'>Sign up </Link>
         </p>
       </form>
     </Container>
+    </div>
   );
 };
 

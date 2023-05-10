@@ -32,9 +32,7 @@ const GigWrapper = (props) => {
               <img src='https://dummyimage.com/75x75/000/fff' alt='' className='rounded-circle' />
               <h4 className='ps-4'>{name}</h4>
             </div>
-            {/* <Link className='my-3' onClick={() => setOpen(true)}>
-              Add bank details
-            </Link> */}
+            
             <p  style={{fontWeight:'bold',marginTop:'12px',marginLeft:'2px'}}>Description</p>
             <Card className='p-2'>
             
