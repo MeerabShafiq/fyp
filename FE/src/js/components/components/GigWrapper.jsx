@@ -29,7 +29,7 @@ const GigWrapper = (props) => {
         <Col md={4}>
           <Card className='p-4 '>
             <div className='d-flex align-items-center px-3'>
-              <img src='https://dummyimage.com/75x75/000/fff' alt='' className='rounded-circle' />
+              <img height={65} width={65} src={profile.profile||'https://dummyimage.com/75x75/000/fff'} alt='' className='rounded-circle' />
               <h4 className='ps-4'>{name}</h4>
             </div>
             

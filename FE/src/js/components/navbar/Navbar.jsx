@@ -15,6 +15,8 @@ import { Link, useNavigate } from 'react-router-dom';
 const CNavbar = ({ setBuyer, buyer }) => {
   const navigate = useNavigate();
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
+  const dp = JSON?.parse(localStorage?.getItem('user-token'))?.dp;
+
 
   return (
     <Navbar expand='lg' className={styles.nav_container}>
@@ -62,7 +64,7 @@ const CNavbar = ({ setBuyer, buyer }) => {
               <Dropdown.Toggle variant='transparent' id='dropdown-basic' className={clsx(styles.pnav_color, 'mx-3')}>
                 {/* <Nav.Link href='#' >  */}
                   <div className='position-relative'>
-                  <RoundImage />
+                  <RoundImage src={dp}/>
                     <div className={styles.online} />
                   </div>
                 {/* </Nav.Link> */}

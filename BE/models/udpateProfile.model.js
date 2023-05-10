@@ -11,6 +11,7 @@ const profile = new mongoose.Schema(
     dateFromInd: String,
     dateToInd: String,
     description: String,
+    profile:String,
   },
   {
     collation: { locale: 'en_US', strength: 1 },
