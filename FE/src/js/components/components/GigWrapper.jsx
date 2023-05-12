@@ -40,7 +40,7 @@ const GigWrapper = (props) => {
             </Card>
             <div className='py-3'>
               <h4>Educational Information:</h4>
-              <p>{profile.industryName}</p>
+              <p>{profile.instituteName}</p>
             </div>
             <div>
               <Row>
@@ -56,8 +56,8 @@ const GigWrapper = (props) => {
             </div>
             <div>
               <div className='py-3'>
-                <h4>Educational Information:</h4>
-                <p>{profile.instituteName}</p>
+                <h4>Industrial Information:</h4>
+                <p>{profile.industryName}</p>
               </div>
               <Row>
                 <Col md={4}>

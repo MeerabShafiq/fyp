@@ -5,12 +5,15 @@ import { Button, Card, Container, Form, Col, Row } from 'react-bootstrap';
 import styles from '../../scss/pages/addUpdate.module.scss';
 import style from '../../scss/pages/login.module.scss'
 import { fetchrequest } from '../../function';
+import {ToastContainer,toast} from 'react-toastify'
+import 'E:/node projects/project no 1/project-main/project/FE/node_modules/react-toastify/dist/ReactToastify.css'
 
 const sendMail = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+ 
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
-  const [field, setfield] = useState({ text: '', Time: '', to: '' , subject:''});
+  const [field, setfield] = useState({ text: '', to: '' , subject:''});
   const goBack = () => navigate(-1);
 
   const handleButtonClick = () => {
@@ -25,47 +28,76 @@ const sendMail = () => {
     setGig((p) => ({ ...p, image: selectedFile }));
     console.log('Selected file:', selectedFile);
   };
+
+ 
 const data ={
   text:field.text,
   subject:field.subject,
     to:field.to, 
-    Time:field.Time,
+    
 }
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(field.message, field.subject, field.to ,field.Time)
-       field.text  && field.to && field.subject && field.Time
+    try{
       await fetchrequest({
-      method:'post', endpoint:'email', data:{...field}
-    }).then((res) => {
-      navigate('/') 
-      console.log("good");
+      method:'post', endpoint:'email', data:{...field}}).then((res) => {
+      console.log(res);
+      if(res?.data?.success)
+      {
+        JSON.stringify({
+          text:res.data.text,
+          subject: res.data.subject,
+          to : res.data.to,
+        })
+        
+      }
+      toast.success('Offer submitted Successfully',
+        {position: toast.POSITION.TOP_CENTER,
+           autoClose:3000,
+
+          })
+          setTimeout(()=>{
+            window.location.href = "https://buy.stripe.com/cN2g0jbIS8nXbEQ5ko";
+          },4000)
+        
     });
-      
     
+  
+  
+  
+  }catch(error){
+    return error;
+  }
+    
+      
   };
   return (
     <div  className={style.h}>
+     
     <Container className='px-5'>
       <h2  style={{ fontWeight: 'bold' , color: '#000000' }} className={clsx(styles.cardTitle, 'py-5')} onClick={goBack}>
         <span className='border'>{`<`}</span>PLace an order
       </h2>
       <Card style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)' }} className={clsx(styles.card)}>
         <Card.Body>
+        
           <Card.Title className={styles.gigInfo}>communicate with seller:</Card.Title>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className='mb-3 d-flex'>
+            <Form.Group className='mb-2 d-flex'>
             </Form.Group>
             <Form.Group className='mb-3 d-flex'> 
               <Form.Control
                 as='textarea'
                 placeholder='text'
-                style={{ height: '100px' }}
+                style={{ height: '100px', width:'480px' }}
                 required
                 name='text'
                 onChange={handleChange}
               />
+             
             </Form.Group>
+           
             <Row>
             <Col sm={4}>
             <Form.Group>
@@ -83,7 +115,7 @@ const data ={
             <Form.Group>
               <Form.Control
                  as='textarea'
-                 placeholder='to'
+                 placeholder='email'
                  style={{ height: '50px' , width:'190px' }}
                  required
                  name='to'
@@ -92,25 +124,18 @@ const data ={
             </Form.Group>
             </Col>
          <Col sm={4}>
-            <Form.Group>
-              <Form.Control
-                 as='textarea'
-                 placeholder='Time'
-                 style={{ height: '50px' , width:'190px' }}
-                 required
-                 name='Time'
-                 onChange={handleChange}
-              />
-            </Form.Group>
+            
             </Col>
             </Row>
             <div className="d-flex justify-content-end">
             <Button type='submit' onClick={handleSubmit}>Create offer</Button>
+            <ToastContainer />
             </div>
           </Form>
         </Card.Body>
       </Card>
     </Container>
+ 
     </div>
   );
 };

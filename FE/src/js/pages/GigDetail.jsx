@@ -8,6 +8,7 @@ import Payment from '../components/components/Payment';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import gigImage from '../../assets/best-fiverr-gigs.png' 
 
 import axios from 'axios'
 
@@ -41,18 +42,17 @@ const goBack = ()=>navigate(-1)
         <Link to="/email">Create offer</Link>
       </p>
         <div>
-          <h3 className={styles.cardTitle}>Title of the gig here</h3>
+          <h3 className={styles.cardTitle}>Title of the GIG here</h3>
           <Card.Text className={styles.cardText}>
           {text}
         </Card.Text>
           <div className={styles.prices}>
-            <div>hours 20</div>
-            <div>rp 2000</div>
+          <h3 className={styles.cardTitle}>GIG Price</h3>
           </div>
-          <img src='https://dummyimage.com/300x300/000/fff' alt='' />
+          <img src={gigImage} alt='' className='rounded-4' />
         </div>
+        
         </Card.Body>
-       
       </Card>
       {open ? <PaymentModal open={open} setOpen={setOpen} /> : null}
       <ToastContainer/>
