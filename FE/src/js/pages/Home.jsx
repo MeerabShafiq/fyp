@@ -10,8 +10,8 @@ const Home = (props) => {
     <div>
       <Navbar {...props}/>
       <div  className={style.h}>
-      <Row className='mx-3 my-2'>
-        <Col md={10} className='text-center'> Gigs</Col>
+      <Row className='mx-3 my-1 py-3'>
+        <Col md={10} className='text-center text-white'>  <h3>Gigs</h3></Col>
         <Col md={2}><Link to='/gig-add'><Button className='d-block ms-auto rounded-3'> Create New</Button></Link></Col>
       </Row>
       <GigWrapper {...props}/>

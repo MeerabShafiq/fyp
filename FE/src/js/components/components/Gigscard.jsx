@@ -22,18 +22,20 @@ const Gigscard = ({buyer}) => {
   return (
     <Container>
       <Row>
-        {loading?<div className='p-5'>loading...</div>:gigs.map((gig,i) => (
+        {loading?<div className='p-5'>loading...</div>: gigs?.length?gigs.map((gig,i) => (
           <Col md={4} key={i} className='p-2'>
             <Card className='p-2'>
-              <img src={gigImage} alt='' className='rounded-4' />
+              <img width={200} height={250} src={gig.imageUrl||gigImage} alt='' className='rounded-4' />
               <div className='d-flex my-3 justify-content-between'>
-                <div> <Link to='/gig-detail'>{gig.title}</Link> </div>
+                <div> <Link to='/gig-detail' state={gig}>{gig.title}</Link> </div>
                 <div>RS. {gig.price}</div>
               </div>
               <ReadMore text={gig.description} maxLength={50} />
             </Card>
           </Col>
-        ))}
+        )): <div>
+          <h1 className='text-center'>No gig found</h1>
+          </div>}
       </Row>
     </Container>
   );

@@ -6,7 +6,6 @@ import styles from '../../scss/pages/addUpdate.module.scss';
 import style from '../../scss/pages/login.module.scss'
 import { fetchrequest } from '../../function';
 import {ToastContainer,toast} from 'react-toastify'
-import 'E:/node projects/project no 1/project-main/project/FE/node_modules/react-toastify/dist/ReactToastify.css'
 
 const sendMail = () => {
   const navigate = useNavigate();
