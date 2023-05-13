@@ -12,13 +12,6 @@ const GigWrapper = (props) => {
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
 
-  const text = ` Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-  scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-  into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-  release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-  software like Aldus PageMaker including versions of Lorem Ipsum.`;
-
   useEffect(() => {
     setLoading(true)
     fetchrequest({
@@ -36,12 +29,10 @@ const GigWrapper = (props) => {
         <Col md={4}>
           <Card className='p-4 '>
             <div className='d-flex align-items-center px-3'>
-              <img src='https://dummyimage.com/75x75/000/fff' alt='' className='rounded-circle' />
+              <img height={65} width={65} src={profile.profile||'https://dummyimage.com/75x75/000/fff'} alt='' className='rounded-circle' />
               <h4 className='ps-4'>{name}</h4>
             </div>
-            {/* <Link className='my-3' onClick={() => setOpen(true)}>
-              Add bank details
-            </Link> */}
+            
             <p  style={{fontWeight:'bold',marginTop:'12px',marginLeft:'2px'}}>Description</p>
             <Card className='p-2'>
             
@@ -49,7 +40,7 @@ const GigWrapper = (props) => {
             </Card>
             <div className='py-3'>
               <h4>Educational Information:</h4>
-              <p>{profile.industryName}</p>
+              <p>{profile.instituteName}</p>
             </div>
             <div>
               <Row>
@@ -65,8 +56,8 @@ const GigWrapper = (props) => {
             </div>
             <div>
               <div className='py-3'>
-                <h4>Educational Information:</h4>
-                <p>{profile.instituteName}</p>
+                <h4>Industrial Information:</h4>
+                <p>{profile.industryName}</p>
               </div>
               <Row>
                 <Col md={4}>

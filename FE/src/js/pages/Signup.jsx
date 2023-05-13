@@ -6,6 +6,7 @@ import styles from '../../scss/pages/login.module.scss';
 import style from '../../scss/pages/signin.module.scss';
 //function
 import { fetchrequest } from '../../function';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -36,9 +37,7 @@ const Signup = () => {
   };
   //facebook button
 
-  const fb_login = () => {
-    window.location.href = 'https://www.facebook.com';
-  };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,13 +90,33 @@ const Signup = () => {
         confirmPassword: loginform.confirmPassword,
       };
 
-      fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
-        if ((response.status = 200)) {
-          navigate('/login');
-        } else {
-          console.log('not signup');
-        }
-      });
+      try {
+        fetchrequest({method:'post', endpoint: 'signup', data }).then((response) => {
+          console.log('response received:', response);
+          console.log('response status:', response.status);
+          if (response.status === 200) {
+            toast('Created Successfully')
+            navigate('/login');
+          } 
+          else if(response.status === 409){
+            setErrors((p) => ({ ...p, email: 'Email exist already' }));
+          }
+          else if(response.status === 404){
+            toast('Try again')
+          }
+        }).catch((error) => {
+          if(error.response.status === 409){
+            setErrors((p) => ({ ...p, email: 'Email exist already' }));
+          }
+          else if(error.response.status === 404){
+            toast('Try again')
+          }
+          console.log('error occurred:', error);
+        });
+      } catch(err){
+        console.log('not signup');
+      }
+      
     }
   };
   // Set hasErrors based on whether there are any errors
@@ -106,12 +125,13 @@ const Signup = () => {
   }, [errors]);
 
   return (
-    <Container className={styles.container}>
+<div className={styles.h}>
+<Container className={styles.container}>
       <Form className={styles.formContainer} onSubmit={handleSubmit}>
-        <h3>Sign Up</h3>
+        <h3 style={{ fontWeight: 'bold' , color: '#000000' }}>Sign Up</h3>
 
         <div className='mb-3'>
-          <label>First name</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>First name</label>
           <input
             type='text'
             value={loginform.firstName}
@@ -124,7 +144,7 @@ const Signup = () => {
         </div>
 
         <div className='mb-3'>
-          <label>Last name</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>Last name</label>
           <input
             type='text'
             value={loginform.lastName}
@@ -137,7 +157,7 @@ const Signup = () => {
         </div>
 
         <div className='mb-3'>
-          <label>Email address</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>Email address</label>
           <input
             type='email'
             value={loginform.email}
@@ -150,7 +170,7 @@ const Signup = () => {
         </div>
 
         <div className='mb-3'>
-          <label>Password</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>Password</label>
           <input
             type='password'
             value={loginform.password}
@@ -162,7 +182,7 @@ const Signup = () => {
           {errors.password && <span className={styles.error}>{errors.password}</span>}
         </div>
         <div className='mb-3'>
-          <label>confirm Password</label>
+          <label style={{ fontWeight: 'bold' , color: '#000000' }}>confirm Password</label>
           <input
             type='password'
             value={loginform.confirmPassword}
@@ -180,14 +200,15 @@ const Signup = () => {
           </button>
         </div>
 
-        <div className='d-grid'>
-          <a>Already registered?</a>
+        <div className='d-grid' >
+          <a style={{ fontWeight: 'bold' , color: '#000000' }}>Already registered?</a>
           <button type='submit' className={style.signupb} onClick={loginf}>
             Click here
           </button>
         </div>
       </Form>
     </Container>
+</div>
   );
 };
 export default Signup;

@@ -7,8 +7,7 @@ const createGig = new mongoose.Schema(
     price:Number,
     description:String,
     name: String,
-    data: Buffer,
-    contentType: String,
+    imageUrl: String,
   },
   {
     collection: 'Gigs',

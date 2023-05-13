@@ -15,37 +15,39 @@ import { Link, useNavigate } from 'react-router-dom';
 const CNavbar = ({ setBuyer, buyer }) => {
   const navigate = useNavigate();
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
+  const dp = JSON?.parse(localStorage?.getItem('user-token'))?.dp;
+
 
   return (
     <Navbar expand='lg' className={styles.nav_container}>
       <Container fluid>
         <Navbar.Brand href='#'>
-          <RoundImage />
+          {/* <RoundImage /> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse id='navbarScroll'>
           <Form className={clsx(styles.nav_search, 'd-flex')}>
-            <Form.Control
+            {/* <Form.Control
               type='search'
               placeholder='Search'
               className={clsx(styles.pnav_color, 'ms-2 border-none')}
               icon='search'
               aria-label='Search'
-            />
-            <Button variant='white' className={clsx(styles.pnav_color)}>
+            /> */}
+            {/* <Button variant='white' className={clsx(styles.pnav_color)}>
               Search
-            </Button>
+            </Button> */}
           </Form>
           <Nav className='ms-auto my-2 my-lg-0 align-items-center' style={{ maxHeight: '120px' }} navbarScroll>
-            <Nav.Link href='#action1' className='mx-3'>
+            {/* <Nav.Link href='#action1' className='mx-3'>
               <Image use='notification' width='30' height='30' fill='#fff' />
-            </Nav.Link>
-            <Nav.Link href='#action2' className='mx-3'>
+            </Nav.Link> */}
+            {/* <Nav.Link href='#action2' className='mx-3'>
               <div>
                 <img className='' src={message} width='30' height='38' />
                 <div className={styles.messageonline} />
               </div>
-            </Nav.Link>
+            </Nav.Link> */}
             {buyer ? (
               <Nav.Link className={clsx(styles.pnav_color, 'mx-3')} onClick={() => setBuyer(false)}>
                 Switch to Seller
@@ -62,7 +64,7 @@ const CNavbar = ({ setBuyer, buyer }) => {
               <Dropdown.Toggle variant='transparent' id='dropdown-basic' className={clsx(styles.pnav_color, 'mx-3')}>
                 {/* <Nav.Link href='#' >  */}
                   <div className='position-relative'>
-                  <RoundImage />
+                  <RoundImage src={dp}/>
                     <div className={styles.online} />
                   </div>
                 {/* </Nav.Link> */}

@@ -7,10 +7,12 @@ const signupRoute = require('./routes/signup.route');
 const stripRoute = require('./routes/strip.route.js');
 const gigRoute = require('./routes/gig.route.js');
 const buyer = require('./routes/login.route.js')
+const emailroute = require('./routes/email.route.js')
 const app = express();
 const stripe = require('stripe')('sk_test_51My2lUGtwtMhoEnmfcTfmrr8whC3sU6G07lscUl0a6g9fTDZX0ClMzZD6d4wGzSS4g4bPulIPyJZhKcO56x0XWJ00N4bVIpiN');
 const updateProfile = require('./routes/updateProfile.js')
 const Payment = require('./routes/payment.route.js')
+const cloudinary = require('cloudinary').v2;
 
 app.use(express.json());
 app.use(cors());
@@ -30,6 +32,12 @@ db.on("error", console.error.bind(console, 'connection error: '))
 db.once("open", () => {
   console.log('Connected Successfully')
 })
+// Configuration 
+cloudinary.config({
+  cloud_name: "dmaqbrci3",
+  api_key: "892285218522175",
+  api_secret: "dEA5TjoVS2s62QV3XXSoH1gkArA"
+});
 
 //signup middleware
 app.use('/', signupRoute);
@@ -45,3 +53,4 @@ app.use('/',buyer)
 app.use('/',updateProfile)
 
 app.use('/',Payment)
+app.use('/',emailroute)
