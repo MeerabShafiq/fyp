@@ -17,6 +17,8 @@ const CreateUpdateProfile = () => {
   const name = JSON?.parse(localStorage?.getItem('user-token'))?.name;
   const userId = JSON?.parse(localStorage?.getItem('user-token'))?.userId;
   const email = JSON?.parse(localStorage?.getItem('user-token'))?.email;
+  const token = JSON?.parse(localStorage?.getItem('user-token'))?.token;
+
 
   //states
   const [loading, setLoading] = useState(false);
@@ -199,12 +201,18 @@ const CreateUpdateProfile = () => {
           },
         })
         .then(async (res) => {
+          
           localStorage.setItem(
             'user-token',
             JSON.stringify({
-              DP: res.data['secure_url'],
+              userId,
+              token,
+              email,
+              name,
+                DP: res.data['secure_url'],
             })
           );
+        
           await fetchrequest({
             endpoint: 'edit-profile',
             method: 'post',
